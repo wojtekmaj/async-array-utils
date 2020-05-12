@@ -1,17 +1,17 @@
 import asyncForEach from './forEach';
 
-export default async function asyncSome(arr, fn) {
+export default function asyncSome(arr, fn) {
   return new Promise((resolve) => {
     let resolved = false;
-    // eslint-disable-next-line no-shadow
-    asyncForEach(arr, async (cur, idx, arr) => {
-      const result = await fn(cur, idx, arr);
-
-      if (!result) {
-        resolved = true;
-        resolve(false);
-      }
-    }).then(() => {
+    asyncForEach(arr, (cur, idx, arr2) => new Promise((resolve2) => {
+      fn(cur, idx, arr2).then((result) => {
+        if (!result) {
+          resolved = true;
+          resolve(false);
+        }
+        resolve2();
+      });
+    })).then(() => {
       if (!resolved) {
         resolve(true);
       }
