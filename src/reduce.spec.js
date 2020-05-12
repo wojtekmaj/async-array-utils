@@ -1,0 +1,21 @@
+import asyncReduce from './reduce';
+
+describe('asyncReduce()', () => {
+  it.skip('assertions below are valid for synchronous .reduce()', () => {
+    const mapper = jest.fn().mockImplementation((temp, cur, idx) => [...temp, `${idx}:${cur}`]);
+
+    const result = ['a', 'b', 'c'].reduce(mapper, ['start']);
+
+    expect(mapper).toHaveBeenCalledTimes(3);
+    expect(result).toEqual(['start', '0:a', '1:b', '2:c']);
+  });
+
+  it('reduces an array properly', async () => {
+    const mapper = jest.fn().mockImplementation(async (temp, cur, idx) => [...temp, `${idx}:${cur}`]);
+
+    const result = await asyncReduce(['a', 'b', 'c'], mapper, ['start']);
+
+    expect(mapper).toHaveBeenCalledTimes(3);
+    expect(result).toEqual(['start', '0:a', '1:b', '2:c']);
+  });
+});
