@@ -14,7 +14,7 @@ import {
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
 
 describe('asyncSomeStrict()', () => {
-  it('assertions below are valid for synchronous .some()', () => {
+  it.skip('assertions below are valid for synchronous .some()', () => {
     const mapper = jest.fn().mockImplementation(largerThanTwo);
 
     inputArr.some(mapper);
@@ -40,7 +40,7 @@ describe('asyncSomeStrict()', () => {
     });
   });
 
-  it('assertions below are valid for synchronous .map()', () => {
+  it.skip('assertions below are valid for synchronous .map()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
     const mapper = jest.fn().mockImplementation(pushDuplicate);
 
@@ -60,7 +60,7 @@ describe('asyncSomeStrict()', () => {
     expect(arr).toEqual(doubleInputArr);
   });
 
-  it('assertions below are valid for synchronous .some()', () => {
+  it.skip('assertions below are valid for synchronous .some()', () => {
     const mapper = jest.fn().mockImplementation(largerThanTwo);
 
     const result = inputArr.some(mapper);
@@ -76,7 +76,7 @@ describe('asyncSomeStrict()', () => {
     expect(result).toEqual(true);
   });
 
-  it('assertions below are valid for synchronous .some()', () => {
+  it.skip('assertions below are valid for synchronous .some()', () => {
     const mapper = jest.fn().mockImplementation(largerThanOneHundred);
 
     const result = inputArr.some(mapper);
