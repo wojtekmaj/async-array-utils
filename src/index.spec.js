@@ -1,4 +1,6 @@
 import {
+  asyncFilter,
+  asyncFilterStrict,
   asyncForEach,
   asyncForEachStrict,
   asyncEvery,
@@ -10,6 +12,14 @@ import {
 } from './index';
 
 describe('index', () => {
+  it('has asyncFilter exported properly', () => {
+    expect(asyncFilter).toBeInstanceOf(Function);
+  });
+
+  it('has asyncFilterStrict exported properly', () => {
+    expect(asyncFilterStrict).toBeInstanceOf(Function);
+  });
+
   it('has asyncForEach exported properly', () => {
     expect(asyncForEach).toBeInstanceOf(Function);
   });

@@ -16,6 +16,8 @@ A collection of array-related async utilities.
 ### Table of contents
 
 * [`asyncEvery()`](#asyncEvery)
+* [`asyncFilter()`](#asyncFilter)
+* [`asyncFilterStrict()`](#asyncFilterStrict)
 * [`asyncForEach()`](#asyncForEach)
 * [`asyncForEachStrict()`](#asyncForEachStrict)
 * [`asyncMap()`](#asyncMap)
@@ -34,6 +36,40 @@ Tests whether all elements in the array pass the test implemented by the provide
 import { asyncEvery } from '@wojtekmaj/async-array-utils';
 
 const largerThanZero = await asyncEvery([1, 2, 3], async (el) => el > 0); // true
+```
+
+### `asyncFilter()`
+
+Creates a new array with all elements that pass the test implemented by the provided asynchronous function.
+
+Note: For optimization purposes, all iterations are ran concurrently. If you rely on any side effects, consider `asyncFilterStrict()` instead.
+
+#### Sample usage
+
+```js
+import { asyncFilter } from '@wojtekmaj/async-array-utils';
+
+const asyncFilteredArr = await asyncFilter([1, 2, 3], async (el) => el > 1); // [2, 3]
+```
+
+### `asyncFilterStrict()`
+
+Like `asyncFilter()`, but runs iterations non-concurrently.
+
+#### Sample usage
+
+```js
+import { asyncFilterStrict } from '@wojtekmaj/async-array-utils';
+
+const indexes = [];
+await asyncFilterStrict(
+  [1, 2, 3],
+  async (el, index) => {
+    indexes.push(index);
+    return el > 1;
+  },
+); // [2, 3]
+console.log(indexes); // [0, 1, 2]
 ```
 
 ### `asyncForEach()`
