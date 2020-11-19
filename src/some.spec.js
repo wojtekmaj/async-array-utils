@@ -11,6 +11,12 @@ import {
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
 
 describe('asyncSome()', () => {
+  it('example from README works as described', async () => {
+    const largerThanZero = await asyncSome([1, 2, 3], async (el) => el > 0);
+
+    expect(largerThanZero).toBe(true);
+  });
+
   it.skip('assertions below are valid for synchronous .some()', () => {
     const mapper = jest.fn().mockImplementation(largerThanTwo);
 

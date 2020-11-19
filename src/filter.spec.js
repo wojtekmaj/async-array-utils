@@ -7,6 +7,12 @@ import {
 } from '../test-utils';
 
 describe('asyncFilter()', () => {
+  it('example from README works as described', async () => {
+    const asyncFilteredArr = await asyncFilter([1, 2, 3], async (el) => el > 1);
+
+    expect(asyncFilteredArr).toEqual([2, 3]);
+  });
+
   it.skip('assertions below are valid for synchronous .filter()', () => {
     const filter = jest.fn().mockImplementation(largerThanTwo);
 

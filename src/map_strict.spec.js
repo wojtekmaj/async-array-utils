@@ -10,6 +10,21 @@ import {
 } from '../test-utils';
 
 describe('asyncMapStrict()', () => {
+  it('example from README works as described', async () => {
+    const indexes = [];
+
+    const asyncMappedArr = await asyncMapStrict(
+      [1, 2, 3],
+      async (el, index) => {
+        indexes.push(index);
+        return el * 2;
+      },
+    ); // [2, 4, 6]
+
+    expect(asyncMappedArr).toEqual([2, 4, 6]);
+    expect(indexes).toEqual([0, 1, 2]);
+  });
+
   it.skip('assertions below are valid for synchronous .map()', () => {
     const mapper = jest.fn().mockImplementation(duplicate);
 

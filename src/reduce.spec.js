@@ -1,6 +1,16 @@
 import asyncReduce from './reduce';
 
 describe('asyncReduce()', () => {
+  it('example from README works as described', async () => {
+    const result = await asyncReduce(
+      [1, 2, 3],
+      async (tmp, cur) => tmp + cur,
+      0,
+    );
+
+    expect(result).toBe(6);
+  });
+
   it.skip('assertions below are valid for synchronous .reduce()', () => {
     const mapper = jest.fn().mockImplementation((temp, cur, idx) => [...temp, `${idx}:${cur}`]);
 

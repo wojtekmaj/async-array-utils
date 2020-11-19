@@ -7,6 +7,26 @@ import {
 } from '../test-utils';
 
 describe('asyncForEachStrict()', () => {
+  it('example from README works as described', async () => {
+    const consoleLog = jest.fn();
+    const indexes = [];
+
+    await asyncForEachStrict(
+      [1, 2, 3],
+      async (el, index) => {
+        indexes.push(index);
+        consoleLog(el * 2);
+      },
+    );
+
+    expect(consoleLog).toHaveBeenCalledTimes(3);
+    expect(consoleLog).toHaveBeenCalledWith(2);
+    expect(consoleLog).toHaveBeenCalledWith(4);
+    expect(consoleLog).toHaveBeenCalledWith(6);
+
+    expect(indexes).toEqual([0, 1, 2]);
+  });
+
   it.skip('assertions below are valid for synchronous .forEach()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
     const mapper = jest.fn().mockImplementation(pushDuplicate);

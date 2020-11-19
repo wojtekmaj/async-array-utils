@@ -10,6 +10,21 @@ import {
 } from '../test-utils';
 
 describe('asyncFilterStrict()', () => {
+  it('example from README works as described', async () => {
+    const indexes = [];
+
+    const asyncFilteredArr = await asyncFilterStrict(
+      [1, 2, 3],
+      async (el, index) => {
+        indexes.push(index);
+        return el > 1;
+      },
+    );
+
+    expect(asyncFilteredArr).toEqual([2, 3]);
+    expect(indexes).toEqual([0, 1, 2]);
+  });
+
   it.skip('assertions below are valid for synchronous .filter()', () => {
     const filter = jest.fn().mockImplementation(largerThanTwo);
 

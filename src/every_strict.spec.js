@@ -22,6 +22,21 @@ function largerOrEqualThanZeroInRandomTime(x) {
 }
 
 describe('asyncEvery()', () => {
+  it('example from README works as described', async () => {
+    const indexes = [];
+
+    const largerThanZero = await asyncEveryStrict(
+      [1, 2, 3],
+      async (el, index) => {
+        indexes.push(index);
+        return el > 0;
+      },
+    );
+
+    expect(largerThanZero).toBe(true);
+    expect(indexes).toEqual([0, 1, 2]);
+  });
+
   it.skip('assertions below are valid for synchronous .every()', () => {
     const mapper = jest.fn().mockImplementation(largerOrEqualThanZero);
 

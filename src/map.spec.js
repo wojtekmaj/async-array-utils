@@ -8,6 +8,12 @@ import {
 } from '../test-utils';
 
 describe('asyncMap()', () => {
+  it('example from README works as described', async () => {
+    const asyncMappedArr = await asyncMap([1, 2, 3], async (el) => el * 2); // [2, 4, 6]
+
+    expect(asyncMappedArr).toEqual([2, 4, 6]);
+  });
+
   it.skip('assertions below are valid for synchronous .map()', () => {
     const mapper = jest.fn().mockImplementation(duplicate);
 

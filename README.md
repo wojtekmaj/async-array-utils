@@ -85,7 +85,7 @@ Like `asyncFilter()`, but runs iterations non-concurrently.
 import { asyncFilterStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-await asyncFilterStrict(
+const asyncFilteredArr = await asyncFilterStrict(
   [1, 2, 3],
   async (el, index) => {
     indexes.push(index);
@@ -156,7 +156,7 @@ Like `asyncMap()`, but runs iterations non-concurrently.
 import { asyncMapStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-await asyncMapStrict(
+const asyncMappedArr = await asyncMapStrict(
   [1, 2, 3],
   async (el, index) => {
     indexes.push(index);
@@ -213,7 +213,7 @@ const largerThanZero = await asyncSomeStrict(
     return el > 0;
   },
 ); // true
-console.log(indexes); // [0, 1, 2]
+console.log(indexes); // [0]
 ```
 
 ## License
