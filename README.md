@@ -146,7 +146,15 @@ Like `asyncSome()`, but runs iterations non-concurrently.
 ```js
 import { asyncSomeStrict } from '@wojtekmaj/async-array-utils';
 
-const largerThanZero = await asyncSomeStrict([1, 2, 3], async (el, index) => el > 0); // true
+const indexes = [];
+const largerThanZero = await asyncSomeStrict(
+  [1, 2, 3],
+  async (el, index) => {
+    indexes.push(index);
+    return el > 0;
+  },
+); // true
+console.log(indexes); // [0, 1, 2]
 ```
 
 ## License
