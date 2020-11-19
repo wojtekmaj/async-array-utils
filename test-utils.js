@@ -2,41 +2,33 @@ export function getRandomTime() {
   return Math.random() * 100;
 }
 
+export function makeDelayed(fn) {
+  return function delayedFunction(x) {
+    return new Promise(
+      (resolve) => setTimeout(() => {
+        resolve(fn(x));
+      }, getRandomTime()),
+    );
+  };
+}
+
 export function duplicate(x) {
   return x * 2;
 }
 
-export function duplicateInRandomTime(x) {
-  return new Promise(
-    (resolve) => setTimeout(() => {
-      resolve(x * 2);
-    }, getRandomTime()),
-  );
-}
+export const duplicateInRandomTime = makeDelayed(duplicate);
 
 export function largerThanTwo(x) {
   return x > 2;
 }
 
-export function largerThanTwoInRandomTime(x) {
-  return new Promise(
-    (resolve) => setTimeout(() => {
-      resolve(x > 2);
-    }, getRandomTime()),
-  );
-}
+export const largerThanTwoInRandomTime = makeDelayed(largerThanTwo);
 
 export function largerThanOneHundred(x) {
   return x > 100;
 }
 
-export function largerThanOneHundredInRandomTime(x) {
-  return new Promise(
-    (resolve) => setTimeout(() => {
-      resolve(x > 100);
-    }, getRandomTime()),
-  );
-}
+export const largerThanOneHundredInRandomTime = makeDelayed(largerThanOneHundred);
 
 export function makePushDuplicate() {
   const arr = [];
