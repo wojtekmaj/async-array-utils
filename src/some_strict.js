@@ -1,14 +1,16 @@
-export default async function asyncSomeStrict(arr, fn) {
-  for (let idx = 0; idx < arr.length; idx += 1) {
-    const cur = arr[idx];
+import asyncForEachStrict from './forEach_strict';
 
-    // eslint-disable-next-line no-await-in-loop
-    const result = await fn(cur, idx, arr);
+export default function asyncSomeStrict(arr, fn) {
+  return new Promise((resolve) => {
+    // eslint-disable-next-line no-shadow
+    asyncForEachStrict(arr, async (cur, idx, arr) => {
+      const result = await fn(cur, idx, arr);
 
-    if (result) {
-      return true;
-    }
-  }
-
-  return false;
+      if (result) {
+        resolve(true);
+      }
+    }).then(() => {
+      resolve(false);
+    });
+  });
 }
