@@ -24,13 +24,11 @@ A collection of array-related async utilities.
 * [`asyncSome()`](#asyncSome)
 * [`asyncSomeStrict()`](#asyncSomeStrict)
 
-### General utils
-
-#### `asyncEvery()`
+### `asyncEvery()`
 
 Tests whether all elements in the array pass the test implemented by the provided asynchronous function. It returns a Boolean value.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncEvery } from '@wojtekmaj/async-array-utils';
@@ -38,13 +36,13 @@ import { asyncEvery } from '@wojtekmaj/async-array-utils';
 const largerThanZero = await asyncEvery([1, 2, 3], async (el, index) => el > 0); // true
 ```
 
-#### `asyncForEach()`
+### `asyncForEach()`
 
 Executes a provided asynchronous function once for each array element.
 
 Note: For optimization purposes, all iterations are ran concurrently. If you rely on any side effects, consider `asyncForEachStrict()` instead.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncForEach } from '@wojtekmaj/async-array-utils';
@@ -55,11 +53,11 @@ await asyncForEach(
 ); // undefined; 3 console.logs
 ```
 
-#### `asyncForEachStrict()`
+### `asyncForEachStrict()`
 
 Like `asyncForEach()`, but runs iterations non-concurrently.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncForEachStrict } from '@wojtekmaj/async-array-utils';
@@ -72,13 +70,13 @@ await asyncForEachStrict(
 console.log(indexes); // [0, 1, 2]
 ```
 
-#### `asyncMap()`
+### `asyncMap()`
 
 Creates a new array populated with the results of calling a provided asynchronous function on every element in the calling array.
 
 Note: For optimization purposes, all iterations are ran concurrently. If you rely on any side effects, consider `asyncMapStrict()` instead.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncMap } from '@wojtekmaj/async-array-utils';
@@ -86,11 +84,11 @@ import { asyncMap } from '@wojtekmaj/async-array-utils';
 const asyncMappedArr = await asyncMap([1, 2, 3], async (el, index) => el * 2); // [2, 4, 6]
 ```
 
-#### `asyncMapStrict()`
+### `asyncMapStrict()`
 
 Like `asyncMap()`, but runs iterations non-concurrently.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncMapStrict } from '@wojtekmaj/async-array-utils';
@@ -100,11 +98,11 @@ await asyncMapStrict([1, 2, 3], async (el, index) => { indexes.push(index); retu
 console.log(indexes); // [0, 1, 2]
 ```
 
-#### `asyncReduce()`
+### `asyncReduce()`
 
 Executes a reducer asynchronous function (that you provide) on each element of the array, resulting in a single output value.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncReduce } from '@wojtekmaj/async-array-utils';
@@ -116,13 +114,13 @@ const result = await asyncReduce(
 ); // 6
 ```
 
-#### `asyncSome()`
+### `asyncSome()`
 
 Tests whether at least one element in the array pass the test implemented by the provided asynchronous function. It returns a Boolean value.
 
 Note: For optimization purposes, all iterations are ran concurrently. If you rely on any side effects or execution order, consider `asyncMapStrict()` instead.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncSome } from '@wojtekmaj/async-array-utils';
@@ -130,11 +128,11 @@ import { asyncSome } from '@wojtekmaj/async-array-utils';
 const largerThanZero = await asyncSome([1, 2, 3], async (el, index) => el > 0); // true
 ```
 
-#### `asyncSomeStrict()`
+### `asyncSomeStrict()`
 
 Like `asyncSome()`, but runs iterations non-concurrently.
 
-##### Sample usage
+#### Sample usage
 
 ```js
 import { asyncSomeStrict } from '@wojtekmaj/async-array-utils';
