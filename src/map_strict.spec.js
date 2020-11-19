@@ -72,7 +72,7 @@ describe('asyncMapStrict()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
     const mapper = jest.fn().mockImplementation(pushDuplicate);
 
-    inputArr.forEach(mapper);
+    inputArr.map(mapper);
 
     expect(mapper).toHaveBeenCalledTimes(inputArr.length);
     expect(arr).toEqual(doubleInputArr);
