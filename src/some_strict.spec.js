@@ -9,6 +9,8 @@ import {
   largerThanOneHundredInRandomTime,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
+  makeDelayed,
+  getTimer,
 } from '../test-utils';
 
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
@@ -27,6 +29,21 @@ describe('asyncSomeStrict()', () => {
 
     expect(largerThanZero).toBe(true);
     expect(indexes).toEqual([0]);
+  });
+
+  it('takes exactly the time necessary to execute', async () => {
+    const delay = 100;
+
+    const timer = getTimer();
+
+    timer.start();
+
+    await asyncSomeStrict([1, 2, 3], makeDelayed((el) => el < 0, delay));
+
+    const timeElapsed = timer.stop();
+
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay);
+    expect(timeElapsed).toBeLessThan((delay + 10) * 3);
   });
 
   it.skip('assertions below are valid for synchronous .some()', () => {

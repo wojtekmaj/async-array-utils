@@ -1,7 +1,9 @@
 import asyncForEachStrict from './forEach_strict';
 import {
   doubleInputArr,
+  getTimer,
   inputArr,
+  makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
 } from '../test-utils';
@@ -25,6 +27,21 @@ describe('asyncForEachStrict()', () => {
     expect(consoleLog).toHaveBeenCalledWith(6);
 
     expect(indexes).toEqual([0, 1, 2]);
+  });
+
+  it('takes exactly the time necessary to execute', async () => {
+    const delay = 100;
+
+    const timer = getTimer();
+
+    timer.start();
+
+    await asyncForEachStrict([1, 2, 3], makeDelayed((el) => el * 2, delay));
+
+    const timeElapsed = timer.stop();
+
+    expect(timeElapsed).toBeGreaterThan(delay * 3);
+    expect(timeElapsed).toBeLessThan((delay + 10) * 3);
   });
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {

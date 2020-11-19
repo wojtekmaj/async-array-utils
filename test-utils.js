@@ -2,12 +2,28 @@ export function getRandomTime() {
   return Math.random() * 100;
 }
 
-export function makeDelayed(fn) {
+export function getTimer() {
+  let startTime;
+
+  function start() {
+    startTime = new Date();
+  }
+
+  function stop() {
+    const endTime = new Date();
+
+    return endTime - startTime;
+  }
+
+  return { start, stop };
+}
+
+export function makeDelayed(fn, delay = getRandomTime()) {
   return function delayedFunction(x) {
     return new Promise(
       (resolve) => setTimeout(() => {
         resolve(fn(x));
-      }, getRandomTime()),
+      }, delay),
     );
   };
 }

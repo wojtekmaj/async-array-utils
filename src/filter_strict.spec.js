@@ -2,9 +2,11 @@ import asyncFilterStrict from './filter_strict';
 
 import {
   doubleInputArr,
+  getTimer,
   inputArr,
   largerThanTwo,
   largerThanTwoInRandomTime,
+  makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
 } from '../test-utils';
@@ -23,6 +25,21 @@ describe('asyncFilterStrict()', () => {
 
     expect(asyncFilteredArr).toEqual([2, 3]);
     expect(indexes).toEqual([0, 1, 2]);
+  });
+
+  it('takes exactly the time necessary to execute', async () => {
+    const delay = 100;
+
+    const timer = getTimer();
+
+    timer.start();
+
+    await asyncFilterStrict([1, 2, 3], makeDelayed((el) => el > 1, delay));
+
+    const timeElapsed = timer.stop();
+
+    expect(timeElapsed).toBeGreaterThan(delay * 3);
+    expect(timeElapsed).toBeLessThan((delay + 10) * 3);
   });
 
   it.skip('assertions below are valid for synchronous .filter()', () => {

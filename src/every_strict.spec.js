@@ -2,9 +2,11 @@ import asyncEveryStrict from './every_strict';
 
 import {
   doubleInputArr,
+  getTimer,
   inputArr,
   largerThanOneHundred,
   largerThanOneHundredInRandomTime,
+  makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
 } from '../test-utils';
@@ -35,6 +37,21 @@ describe('asyncEvery()', () => {
 
     expect(largerThanZero).toBe(true);
     expect(indexes).toEqual([0, 1, 2]);
+  });
+
+  it('takes exactly the time necessary to execute', async () => {
+    const delay = 100;
+
+    const timer = getTimer();
+
+    timer.start();
+
+    await asyncEveryStrict([1, 2, 3], makeDelayed((el) => el > 0, delay));
+
+    const timeElapsed = timer.stop();
+
+    expect(timeElapsed).toBeGreaterThan(delay * 3);
+    expect(timeElapsed).toBeLessThan((delay + 10) * 3);
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {

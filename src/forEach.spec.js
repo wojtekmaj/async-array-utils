@@ -1,7 +1,9 @@
 import asyncForEach from './forEach';
 
 import {
+  getTimer,
   inputArr,
+  makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
 } from '../test-utils';
@@ -19,6 +21,21 @@ describe('asyncForEach()', () => {
     expect(consoleLog).toHaveBeenCalledWith(2);
     expect(consoleLog).toHaveBeenCalledWith(4);
     expect(consoleLog).toHaveBeenCalledWith(6);
+  });
+
+  it('takes exactly the time necessary to execute', async () => {
+    const delay = 100;
+
+    const timer = getTimer();
+
+    timer.start();
+
+    await asyncForEach([1, 2, 3], makeDelayed((el) => el * 2, delay));
+
+    const timeElapsed = timer.stop();
+
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay);
+    expect(timeElapsed).toBeLessThan(delay + 10);
   });
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {

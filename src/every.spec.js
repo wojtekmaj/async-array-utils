@@ -1,9 +1,11 @@
 import asyncEvery from './every';
 
 import {
+  getTimer,
   inputArr,
   largerThanOneHundred,
   largerThanOneHundredInRandomTime,
+  makeDelayed,
 } from '../test-utils';
 
 function largerOrEqualThanZero(x) {
@@ -23,6 +25,21 @@ describe('asyncEvery()', () => {
     const largerThanZero = await asyncEvery([1, 2, 3], async (el) => el > 0);
 
     expect(largerThanZero).toBe(true);
+  });
+
+  it('takes exactly the time necessary to execute', async () => {
+    const delay = 100;
+
+    const timer = getTimer();
+
+    timer.start();
+
+    await asyncEvery([1, 2, 3], makeDelayed((el) => el > 0, delay));
+
+    const timeElapsed = timer.stop();
+
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay);
+    expect(timeElapsed).toBeLessThan(delay + 10);
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
