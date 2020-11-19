@@ -13,6 +13,17 @@ A collection of array-related async utilities.
 
 ## User guide
 
+### Table of contents
+
+* [`asyncEvery()`](#asyncEvery)
+* [`asyncForEach()`](#asyncForEach)
+* [`asyncForEachStrict()`](#asyncForEachStrict)
+* [`asyncMap()`](#asyncMap)
+* [`asyncMapStrict()`](#asyncMapStrict)
+* [`asyncReduce()`](#asyncReduce)
+* [`asyncSome()`](#asyncSome)
+* [`asyncSomeStrict()`](#asyncSomeStrict)
+
 ### General utils
 
 #### `asyncEvery()`
