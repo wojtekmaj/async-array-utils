@@ -1,11 +1,14 @@
 import asyncSomeStrict from './some_strict';
 
 import {
+  doubleInputArr,
   inputArr,
   largerThanTwo,
   largerThanTwoInRandomTime,
   largerThanOneHundred,
   largerThanOneHundredInRandomTime,
+  makePushDuplicate,
+  makePushDuplicateInRandomTime,
 } from '../test-utils';
 
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
@@ -35,6 +38,26 @@ describe('asyncSomeStrict()', () => {
     inputArr.slice(0, firstElementLargerThanTwo).forEach((el, idx) => {
       expect(mapper).toHaveBeenCalledWith(el, idx, inputArr);
     });
+  });
+
+  it('assertions below are valid for synchronous .map()', () => {
+    const [arr, pushDuplicate] = makePushDuplicate();
+    const mapper = jest.fn().mockImplementation(pushDuplicate);
+
+    inputArr.some(mapper);
+
+    expect(mapper).toHaveBeenCalledTimes(inputArr.length);
+    expect(arr).toEqual(doubleInputArr);
+  });
+
+  it('iterates through an array properly with side effects', async () => {
+    const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
+    const mapper = jest.fn().mockImplementation(pushDuplicate);
+
+    await asyncSomeStrict(inputArr, mapper);
+
+    expect(mapper).toHaveBeenCalledTimes(inputArr.length);
+    expect(arr).toEqual(doubleInputArr);
   });
 
   it('assertions below are valid for synchronous .some()', () => {
