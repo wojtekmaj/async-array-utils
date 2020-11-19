@@ -1,3 +1,7 @@
+export function getRandomTime() {
+  return Math.random() * 100;
+}
+
 export function duplicate(x) {
   return x * 2;
 }
@@ -6,7 +10,7 @@ export function duplicateInRandomTime(x) {
   return new Promise(
     (resolve) => setTimeout(() => {
       resolve(x * 2);
-    }, Math.random() * 100),
+    }, getRandomTime()),
   );
 }
 
@@ -18,7 +22,7 @@ export function largerThanTwoInRandomTime(x) {
   return new Promise(
     (resolve) => setTimeout(() => {
       resolve(x > 2);
-    }, Math.random() * 100),
+    }, getRandomTime()),
   );
 }
 
@@ -30,7 +34,7 @@ export function largerThanOneHundredInRandomTime(x) {
   return new Promise(
     (resolve) => setTimeout(() => {
       resolve(x > 100);
-    }, Math.random() * 100),
+    }, getRandomTime()),
   );
 }
 
