@@ -1,5 +1,7 @@
 import asyncMapStrict from './map_strict';
 
-export default async function asyncForEachStrict(arr, fn) {
-  await asyncMapStrict(arr, fn);
+export default function asyncForEachStrict(arr, fn) {
+  return new Promise((resolve) => {
+    asyncMapStrict(arr, fn).then(() => resolve());
+  });
 }
