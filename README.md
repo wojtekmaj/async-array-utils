@@ -33,7 +33,7 @@ Tests whether all elements in the array pass the test implemented by the provide
 ```js
 import { asyncEvery } from '@wojtekmaj/async-array-utils';
 
-const largerThanZero = await asyncEvery([1, 2, 3], async (el, index) => el > 0); // true
+const largerThanZero = await asyncEvery([1, 2, 3], async (el) => el > 0); // true
 ```
 
 ### `asyncForEach()`
@@ -84,7 +84,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 ```js
 import { asyncMap } from '@wojtekmaj/async-array-utils';
 
-const asyncMappedArr = await asyncMap([1, 2, 3], async (el, index) => el * 2); // [2, 4, 6]
+const asyncMappedArr = await asyncMap([1, 2, 3], async (el) => el * 2); // [2, 4, 6]
 ```
 
 ### `asyncMapStrict()`
@@ -134,7 +134,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 ```js
 import { asyncSome } from '@wojtekmaj/async-array-utils';
 
-const largerThanZero = await asyncSome([1, 2, 3], async (el, index) => el > 0); // true
+const largerThanZero = await asyncSome([1, 2, 3], async (el) => el > 0); // true
 ```
 
 ### `asyncSomeStrict()`
