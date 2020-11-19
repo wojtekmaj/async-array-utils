@@ -65,7 +65,10 @@ import { asyncForEachStrict } from '@wojtekmaj/async-array-utils';
 const indexes = [];
 await asyncForEachStrict(
   [1, 2, 3],
-  async (el) => { indexes.push(index); console.log(el * 2); }
+  async (el, index) => {
+    indexes.push(index);
+    console.log(el * 2);
+  },
 ); // undefined; 3 console.logs
 console.log(indexes); // [0, 1, 2]
 ```
@@ -94,7 +97,13 @@ Like `asyncMap()`, but runs iterations non-concurrently.
 import { asyncMapStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-await asyncMapStrict([1, 2, 3], async (el, index) => { indexes.push(index); return el * 2; }); // [2, 4, 6]
+await asyncMapStrict(
+  [1, 2, 3],
+  async (el, index) => {
+    indexes.push(index);
+    return el * 2;
+  },
+); // [2, 4, 6]
 console.log(indexes); // [0, 1, 2]
 ```
 
