@@ -3,9 +3,8 @@ import asyncForEachStrict from './forEach_strict';
 export default function asyncFilterStrict(arr, fn) {
   const result = [];
 
-  // eslint-disable-next-line no-shadow
-  return asyncForEachStrict(arr, (cur, idx, arr) => new Promise((resolve) => {
-    fn(cur, idx, arr).then((cond) => {
+  return asyncForEachStrict(arr, (cur, idx, arr2) => new Promise((resolve) => {
+    fn(cur, idx, arr2).then((cond) => {
       if (cond) {
         result[idx] = cur;
       }
