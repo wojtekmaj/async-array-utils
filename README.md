@@ -16,6 +16,7 @@ A collection of array-related async utilities.
 ### Table of contents
 
 * [`asyncEvery()`](#asyncEvery)
+* [`asyncEveryStrict()`](#asyncEveryStrict)
 * [`asyncFilter()`](#asyncFilter)
 * [`asyncFilterStrict()`](#asyncFilterStrict)
 * [`asyncForEach()`](#asyncForEach)
@@ -30,12 +31,34 @@ A collection of array-related async utilities.
 
 Tests whether all elements in the array pass the test implemented by the provided asynchronous function. It returns a Boolean value.
 
+Note: For optimization purposes, all iterations are ran concurrently. If you rely on any side effects, consider `asyncEveryStrict()` instead.
+
 #### Sample usage
 
 ```js
 import { asyncEvery } from '@wojtekmaj/async-array-utils';
 
 const largerThanZero = await asyncEvery([1, 2, 3], async (el) => el > 0); // true
+```
+
+### `asyncEveryStrict()`
+
+Like `asyncEvery()`, but runs iterations non-concurrently.
+
+#### Sample usage
+
+```js
+import { asyncEveryStrict } from '@wojtekmaj/async-array-utils';
+
+const indexes = [];
+const largerThanZero = await asyncEveryStrict(
+  [1, 2, 3],
+  async (el, index) => {
+    indexes.push(index);
+    return el > 0;
+  },
+); // true
+console.log(indexes); // [0, 1, 2]
 ```
 
 ### `asyncFilter()`

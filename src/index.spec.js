@@ -4,6 +4,7 @@ import {
   asyncForEach,
   asyncForEachStrict,
   asyncEvery,
+  asyncEveryStrict,
   asyncMap,
   asyncMapStrict,
   asyncReduce,
@@ -30,6 +31,10 @@ describe('index', () => {
 
   it('has asyncEvery exported properly', () => {
     expect(asyncEvery).toBeInstanceOf(Function);
+  });
+
+  it('has asyncEveryStrict exported properly', () => {
+    expect(asyncEveryStrict).toBeInstanceOf(Function);
   });
 
   it('has asyncMap exported properly', () => {
