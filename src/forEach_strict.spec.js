@@ -102,7 +102,7 @@ describe('asyncForEachStrict()', () => {
   });
 
   it('returns undefined', async () => {
-    const [, pushDuplicate] = makePushDuplicate();
+    const [, pushDuplicate] = makePushDuplicateInRandomTime();
     const mapper = jest.fn().mockImplementation(pushDuplicate);
 
     const result = await asyncForEachStrict(inputArr, mapper);
