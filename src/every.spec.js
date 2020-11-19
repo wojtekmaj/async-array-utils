@@ -2,6 +2,8 @@ import asyncEvery from './every';
 
 import {
   inputArr,
+  largerThanOneHundred,
+  largerThanOneHundredInRandomTime,
 } from '../test-utils';
 
 function largerOrEqualThanZero(x) {
@@ -12,18 +14,6 @@ function largerOrEqualThanZeroInRandomTime(x) {
   return new Promise(
     (resolve) => setTimeout(() => {
       resolve(x >= 0);
-    }, Math.random() * 100),
-  );
-}
-
-function largerThanOneHundred(x) {
-  return x > 100;
-}
-
-function largerThanOneHundredInRandomTime(x) {
-  return new Promise(
-    (resolve) => setTimeout(() => {
-      resolve(x > 100);
     }, Math.random() * 100),
   );
 }
