@@ -20,8 +20,8 @@ export function getTimer() {
 
 export function makeDelayed(fn, delay = getRandomTime()) {
   return function delayedFunction(x) {
-    return new Promise(
-      (resolve) => setTimeout(() => {
+    return new Promise((resolve) =>
+      setTimeout(() => {
         resolve(fn(x));
       }, delay),
     );

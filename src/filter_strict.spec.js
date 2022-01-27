@@ -15,13 +15,10 @@ describe('asyncFilterStrict()', () => {
   it('example from README works as described', async () => {
     const indexes = [];
 
-    const asyncFilteredArr = await asyncFilterStrict(
-      [1, 2, 3],
-      async (el, index) => {
-        indexes.push(index);
-        return el > 1;
-      },
-    );
+    const asyncFilteredArr = await asyncFilterStrict([1, 2, 3], async (el, index) => {
+      indexes.push(index);
+      return el > 1;
+    });
 
     expect(asyncFilteredArr).toEqual([2, 3]);
     expect(indexes).toEqual([0, 1, 2]);
@@ -34,7 +31,10 @@ describe('asyncFilterStrict()', () => {
 
     timer.start();
 
-    await asyncFilterStrict([1, 2, 3], makeDelayed((el) => el > 1, delay));
+    await asyncFilterStrict(
+      [1, 2, 3],
+      makeDelayed((el) => el > 1, delay),
+    );
 
     const timeElapsed = timer.stop();
 

@@ -16,8 +16,8 @@ function largerOrEqualThanZero(x) {
 }
 
 function largerOrEqualThanZeroInRandomTime(x) {
-  return new Promise(
-    (resolve) => setTimeout(() => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
       resolve(x >= 0);
     }, Math.random() * 100),
   );
@@ -27,13 +27,10 @@ describe('asyncEvery()', () => {
   it('example from README works as described', async () => {
     const indexes = [];
 
-    const largerThanZero = await asyncEveryStrict(
-      [1, 2, 3],
-      async (el, index) => {
-        indexes.push(index);
-        return el > 0;
-      },
-    );
+    const largerThanZero = await asyncEveryStrict([1, 2, 3], async (el, index) => {
+      indexes.push(index);
+      return el > 0;
+    });
 
     expect(largerThanZero).toBe(true);
     expect(indexes).toEqual([0, 1, 2]);
@@ -46,7 +43,10 @@ describe('asyncEvery()', () => {
 
     timer.start();
 
-    await asyncEveryStrict([1, 2, 3], makeDelayed((el) => el > 0, delay));
+    await asyncEveryStrict(
+      [1, 2, 3],
+      makeDelayed((el) => el > 0, delay),
+    );
 
     const timeElapsed = timer.stop();
 

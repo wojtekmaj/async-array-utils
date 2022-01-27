@@ -26,7 +26,10 @@ describe('asyncSome()', () => {
 
     timer.start();
 
-    await asyncSome([1, 2, 3], makeDelayed((el) => el < 0, delay));
+    await asyncSome(
+      [1, 2, 3],
+      makeDelayed((el) => el < 0, delay),
+    );
 
     const timeElapsed = timer.stop();
 

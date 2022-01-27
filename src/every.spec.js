@@ -13,8 +13,8 @@ function largerOrEqualThanZero(x) {
 }
 
 function largerOrEqualThanZeroInRandomTime(x) {
-  return new Promise(
-    (resolve) => setTimeout(() => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
       resolve(x >= 0);
     }, Math.random() * 100),
   );
@@ -34,7 +34,10 @@ describe('asyncEvery()', () => {
 
     timer.start();
 
-    await asyncEvery([1, 2, 3], makeDelayed((el) => el > 0, delay));
+    await asyncEvery(
+      [1, 2, 3],
+      makeDelayed((el) => el > 0, delay),
+    );
 
     const timeElapsed = timer.stop();
 

@@ -12,10 +12,9 @@ describe('asyncForEach()', () => {
   it('example from README works as described', async () => {
     const consoleLog = jest.fn();
 
-    await asyncForEach(
-      [1, 2, 3],
-      async (el) => { consoleLog(el * 2); },
-    ); // undefined; 3 console.logs
+    await asyncForEach([1, 2, 3], async (el) => {
+      consoleLog(el * 2);
+    }); // undefined; 3 console.logs
 
     expect(consoleLog).toHaveBeenCalledTimes(3);
     expect(consoleLog).toHaveBeenCalledWith(2);
@@ -30,7 +29,10 @@ describe('asyncForEach()', () => {
 
     timer.start();
 
-    await asyncForEach([1, 2, 3], makeDelayed((el) => el * 2, delay));
+    await asyncForEach(
+      [1, 2, 3],
+      makeDelayed((el) => el * 2, delay),
+    );
 
     const timeElapsed = timer.stop();
 

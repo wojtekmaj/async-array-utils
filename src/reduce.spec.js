@@ -3,11 +3,7 @@ import asyncReduce from './reduce';
 
 describe('asyncReduce()', () => {
   it('example from README works as described', async () => {
-    const result = await asyncReduce(
-      [1, 2, 3],
-      async (tmp, cur) => tmp + cur,
-      0,
-    );
+    const result = await asyncReduce([1, 2, 3], async (tmp, cur) => tmp + cur, 0);
 
     expect(result).toBe(6);
   });
@@ -41,7 +37,9 @@ describe('asyncReduce()', () => {
   });
 
   it('reduces an array properly', async () => {
-    const mapper = jest.fn().mockImplementation(async (temp, cur, idx) => [...temp, `${idx}:${cur}`]);
+    const mapper = jest
+      .fn()
+      .mockImplementation(async (temp, cur, idx) => [...temp, `${idx}:${cur}`]);
 
     const result = await asyncReduce(['a', 'b', 'c'], mapper, ['start']);
 

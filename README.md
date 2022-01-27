@@ -1,31 +1,33 @@
 [![npm](https://img.shields.io/npm/v/@wojtekmaj/async-array-utils.svg)](https://www.npmjs.com/package/@wojtekmaj/async-array-utils) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/async-array-utils.svg) [![CI](https://github.com/wojtekmaj/async-array-utils/workflows/CI/badge.svg)](https://github.com/wojtekmaj/async-array-utils/actions) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 # Async-Array-Utils
+
 A collection of array-related async utilities.
 
 ## tl;dr
-* Install by executing `npm install @wojtekmaj/async-array-utils` or `yarn add @wojtekmaj/async-array-utils`.
-* Import by adding `import * as asyncArrayUtils from '@wojtekmaj/async-array-utils'`.
-* Do stuff with it!
-    ```js
-    const asyncMappedArr = await asyncMap([1, 2, 3], async (x) => x * 2);
-    ```
+
+- Install by executing `npm install @wojtekmaj/async-array-utils` or `yarn add @wojtekmaj/async-array-utils`.
+- Import by adding `import * as asyncArrayUtils from '@wojtekmaj/async-array-utils'`.
+- Do stuff with it!
+  ```js
+  const asyncMappedArr = await asyncMap([1, 2, 3], async (x) => x * 2);
+  ```
 
 ## User guide
 
 ### Table of contents
 
-* [`asyncEvery()`](#asyncEvery)
-* [`asyncEveryStrict()`](#asyncEveryStrict)
-* [`asyncFilter()`](#asyncFilter)
-* [`asyncFilterStrict()`](#asyncFilterStrict)
-* [`asyncForEach()`](#asyncForEach)
-* [`asyncForEachStrict()`](#asyncForEachStrict)
-* [`asyncMap()`](#asyncMap)
-* [`asyncMapStrict()`](#asyncMapStrict)
-* [`asyncReduce()`](#asyncReduce)
-* [`asyncSome()`](#asyncSome)
-* [`asyncSomeStrict()`](#asyncSomeStrict)
+- [`asyncEvery()`](#asyncEvery)
+- [`asyncEveryStrict()`](#asyncEveryStrict)
+- [`asyncFilter()`](#asyncFilter)
+- [`asyncFilterStrict()`](#asyncFilterStrict)
+- [`asyncForEach()`](#asyncForEach)
+- [`asyncForEachStrict()`](#asyncForEachStrict)
+- [`asyncMap()`](#asyncMap)
+- [`asyncMapStrict()`](#asyncMapStrict)
+- [`asyncReduce()`](#asyncReduce)
+- [`asyncSome()`](#asyncSome)
+- [`asyncSomeStrict()`](#asyncSomeStrict)
 
 ### `asyncEvery()`
 
@@ -51,13 +53,10 @@ Like `asyncEvery()`, but runs iterations non-concurrently.
 import { asyncEveryStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-const largerThanZero = await asyncEveryStrict(
-  [1, 2, 3],
-  async (el, index) => {
-    indexes.push(index);
-    return el > 0;
-  },
-); // true
+const largerThanZero = await asyncEveryStrict([1, 2, 3], async (el, index) => {
+  indexes.push(index);
+  return el > 0;
+}); // true
 console.log(indexes); // [0, 1, 2]
 ```
 
@@ -85,13 +84,10 @@ Like `asyncFilter()`, but runs iterations non-concurrently.
 import { asyncFilterStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-const asyncFilteredArr = await asyncFilterStrict(
-  [1, 2, 3],
-  async (el, index) => {
-    indexes.push(index);
-    return el > 1;
-  },
-); // [2, 3]
+const asyncFilteredArr = await asyncFilterStrict([1, 2, 3], async (el, index) => {
+  indexes.push(index);
+  return el > 1;
+}); // [2, 3]
 console.log(indexes); // [0, 1, 2]
 ```
 
@@ -106,10 +102,9 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 ```js
 import { asyncForEach } from '@wojtekmaj/async-array-utils';
 
-await asyncForEach(
-  [1, 2, 3],
-  async (el) => { console.log(el * 2); }
-); // undefined; 3 console.logs
+await asyncForEach([1, 2, 3], async (el) => {
+  console.log(el * 2);
+}); // undefined; 3 console.logs
 ```
 
 ### `asyncForEachStrict()`
@@ -122,13 +117,10 @@ Like `asyncForEach()`, but runs iterations non-concurrently.
 import { asyncForEachStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-await asyncForEachStrict(
-  [1, 2, 3],
-  async (el, index) => {
-    indexes.push(index);
-    console.log(el * 2);
-  },
-); // undefined; 3 console.logs
+await asyncForEachStrict([1, 2, 3], async (el, index) => {
+  indexes.push(index);
+  console.log(el * 2);
+}); // undefined; 3 console.logs
 console.log(indexes); // [0, 1, 2]
 ```
 
@@ -156,13 +148,10 @@ Like `asyncMap()`, but runs iterations non-concurrently.
 import { asyncMapStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-const asyncMappedArr = await asyncMapStrict(
-  [1, 2, 3],
-  async (el, index) => {
-    indexes.push(index);
-    return el * 2;
-  },
-); // [2, 4, 6]
+const asyncMappedArr = await asyncMapStrict([1, 2, 3], async (el, index) => {
+  indexes.push(index);
+  return el * 2;
+}); // [2, 4, 6]
 console.log(indexes); // [0, 1, 2]
 ```
 
@@ -177,8 +166,10 @@ import { asyncReduce } from '@wojtekmaj/async-array-utils';
 
 const result = await asyncReduce(
   [1, 2, 3],
-  async (tmp, cur, idx) => { return tmp + cur },
-  0
+  async (tmp, cur, idx) => {
+    return tmp + cur;
+  },
+  0,
 ); // 6
 ```
 
@@ -206,13 +197,10 @@ Like `asyncSome()`, but runs iterations non-concurrently.
 import { asyncSomeStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
-const largerThanZero = await asyncSomeStrict(
-  [1, 2, 3],
-  async (el, index) => {
-    indexes.push(index);
-    return el > 0;
-  },
-); // true
+const largerThanZero = await asyncSomeStrict([1, 2, 3], async (el, index) => {
+  indexes.push(index);
+  return el > 0;
+}); // true
 console.log(indexes); // [0]
 ```
 

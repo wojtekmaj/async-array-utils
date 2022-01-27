@@ -22,7 +22,10 @@ describe('asyncFilter()', () => {
 
     timer.start();
 
-    await asyncFilter([1, 2, 3], makeDelayed((el) => el > 1, delay));
+    await asyncFilter(
+      [1, 2, 3],
+      makeDelayed((el) => el > 1, delay),
+    );
 
     const timeElapsed = timer.stop();
 

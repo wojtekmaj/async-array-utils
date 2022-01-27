@@ -19,13 +19,10 @@ describe('asyncSomeStrict()', () => {
   it('example from README works as described', async () => {
     const indexes = [];
 
-    const largerThanZero = await asyncSomeStrict(
-      [1, 2, 3],
-      async (el, index) => {
-        indexes.push(index);
-        return el > 0;
-      },
-    );
+    const largerThanZero = await asyncSomeStrict([1, 2, 3], async (el, index) => {
+      indexes.push(index);
+      return el > 0;
+    });
 
     expect(largerThanZero).toBe(true);
     expect(indexes).toEqual([0]);
@@ -38,7 +35,10 @@ describe('asyncSomeStrict()', () => {
 
     timer.start();
 
-    await asyncSomeStrict([1, 2, 3], makeDelayed((el) => el < 0, delay));
+    await asyncSomeStrict(
+      [1, 2, 3],
+      makeDelayed((el) => el < 0, delay),
+    );
 
     const timeElapsed = timer.stop();
 

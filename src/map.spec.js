@@ -23,7 +23,10 @@ describe('asyncMap()', () => {
 
     timer.start();
 
-    await asyncMap([1, 2, 3], makeDelayed((el) => el * 2, delay));
+    await asyncMap(
+      [1, 2, 3],
+      makeDelayed((el) => el * 2, delay),
+    );
 
     const timeElapsed = timer.stop();
 

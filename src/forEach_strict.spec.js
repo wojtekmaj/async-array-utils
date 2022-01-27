@@ -13,13 +13,10 @@ describe('asyncForEachStrict()', () => {
     const consoleLog = jest.fn();
     const indexes = [];
 
-    await asyncForEachStrict(
-      [1, 2, 3],
-      async (el, index) => {
-        indexes.push(index);
-        consoleLog(el * 2);
-      },
-    );
+    await asyncForEachStrict([1, 2, 3], async (el, index) => {
+      indexes.push(index);
+      consoleLog(el * 2);
+    });
 
     expect(consoleLog).toHaveBeenCalledTimes(3);
     expect(consoleLog).toHaveBeenCalledWith(2);
@@ -36,7 +33,10 @@ describe('asyncForEachStrict()', () => {
 
     timer.start();
 
-    await asyncForEachStrict([1, 2, 3], makeDelayed((el) => el * 2, delay));
+    await asyncForEachStrict(
+      [1, 2, 3],
+      makeDelayed((el) => el * 2, delay),
+    );
 
     const timeElapsed = timer.stop();
 
