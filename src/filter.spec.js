@@ -30,7 +30,7 @@ describe('asyncFilter()', () => {
     const timeElapsed = timer.stop();
 
     expect(timeElapsed).toBeGreaterThanOrEqual(delay);
-    expect(timeElapsed).toBeLessThan(delay + 10);
+    expect(timeElapsed).toBeLessThan(delay * 1.25);
   });
 
   it.skip('assertions below are valid for synchronous .filter()', () => {

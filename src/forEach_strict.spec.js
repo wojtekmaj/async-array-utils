@@ -40,8 +40,8 @@ describe('asyncForEachStrict()', () => {
 
     const timeElapsed = timer.stop();
 
-    expect(timeElapsed).toBeGreaterThan(delay * 3);
-    expect(timeElapsed).toBeLessThan((delay + 10) * 3);
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay * 3);
+    expect(timeElapsed).toBeLessThan(delay * 1.25 * 3);
   });
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {

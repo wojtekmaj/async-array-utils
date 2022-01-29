@@ -43,7 +43,7 @@ describe('asyncSomeStrict()', () => {
     const timeElapsed = timer.stop();
 
     expect(timeElapsed).toBeGreaterThanOrEqual(delay);
-    expect(timeElapsed).toBeLessThan((delay + 10) * 3);
+    expect(timeElapsed).toBeLessThan(delay * 1.25 * 3);
   });
 
   it.skip('assertions below are valid for synchronous .some()', () => {
