@@ -23,7 +23,7 @@ function largerOrEqualThanZeroInRandomTime(x) {
   );
 }
 
-describe('asyncEvery()', () => {
+describe('asyncEveryStrict()', () => {
   it('example from README works as described', async () => {
     const indexes = [];
 
