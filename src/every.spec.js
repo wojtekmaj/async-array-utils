@@ -6,6 +6,7 @@ import {
   largerThanOneHundred,
   largerThanOneHundredInRandomTime,
   makeDelayed,
+  throws,
 } from '../test-utils';
 
 function largerOrEqualThanZero(x) {
@@ -101,5 +102,17 @@ describe('asyncEvery()', () => {
     const result = await asyncEvery(inputArr, mapper);
 
     expect(result).toEqual(false);
+  });
+
+  it.skip('assertions below are valid for synchronous .every()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => inputArr.every(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncEvery(inputArr, mapper)).rejects.toThrow('Some error');
   });
 });

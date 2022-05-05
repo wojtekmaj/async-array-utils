@@ -1,5 +1,5 @@
 export default function asyncMapStrict(arr, fn) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const result = [];
     arr
       .reduce(
@@ -11,6 +11,7 @@ export default function asyncMapStrict(arr, fn) {
           ),
         Promise.resolve(),
       )
-      .then(() => resolve(result));
+      .then(() => resolve(result))
+      .catch(reject);
   });
 }

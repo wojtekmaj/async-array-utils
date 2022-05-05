@@ -11,6 +11,7 @@ import {
   makePushDuplicateInRandomTime,
   makeDelayed,
   getTimer,
+  throws,
 } from '../test-utils';
 
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
@@ -122,5 +123,17 @@ describe('asyncSomeStrict()', () => {
     const result = await asyncSomeStrict(inputArr, mapper);
 
     expect(result).toEqual(false);
+  });
+
+  it.skip('assertions below are valid for synchronous .some()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => inputArr.some(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncSomeStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });
 });

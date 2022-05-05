@@ -7,6 +7,7 @@ import {
   getTimer,
   inputArr,
   makeDelayed,
+  throws,
 } from '../test-utils';
 
 describe('asyncMap()', () => {
@@ -74,5 +75,17 @@ describe('asyncMap()', () => {
     const result = await asyncMap(inputArr, mapper);
 
     expect(result).toEqual(doubleInputArr);
+  });
+
+  it.skip('assertions below are valid for synchronous .map()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => inputArr.map(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncMap(inputArr, mapper)).rejects.toThrow('Some error');
   });
 });

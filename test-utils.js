@@ -66,5 +66,9 @@ export function makePushDuplicateInRandomTime() {
   return [arr, pushDuplicate];
 }
 
+export function throws() {
+  throw new Error('Some error');
+}
+
 export const inputArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 export const doubleInputArr = inputArr.map(duplicate);

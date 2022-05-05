@@ -9,6 +9,7 @@ import {
   makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
+  throws,
 } from '../test-utils';
 
 describe('asyncMapStrict()', () => {
@@ -102,5 +103,17 @@ describe('asyncMapStrict()', () => {
     const result = await asyncMapStrict(inputArr, mapper);
 
     expect(result).toEqual(doubleInputArr);
+  });
+
+  it.skip('assertions below are valid for synchronous .map()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => inputArr.map(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncMapStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });
 });

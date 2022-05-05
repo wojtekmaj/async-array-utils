@@ -1,5 +1,6 @@
-import { getTimer, makeDelayed } from '../test-utils';
 import asyncReduce from './reduce';
+
+import { getTimer, makeDelayed, throws } from '../test-utils';
 
 describe('asyncReduce()', () => {
   it('example from README works as described', async () => {
@@ -45,5 +46,17 @@ describe('asyncReduce()', () => {
 
     expect(mapper).toHaveBeenCalledTimes(3);
     expect(result).toEqual(['start', '0:a', '1:b', '2:c']);
+  });
+
+  it.skip('assertions below are valid for synchronous .reduce()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => ['a', 'b', 'c'].reduce(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncReduce(['a', 'b', 'c'], mapper)).rejects.toThrow('Some error');
   });
 });

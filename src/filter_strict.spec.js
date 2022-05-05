@@ -9,6 +9,7 @@ import {
   makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
+  throws,
 } from '../test-utils';
 
 describe('asyncFilterStrict()', () => {
@@ -68,7 +69,7 @@ describe('asyncFilterStrict()', () => {
     });
   });
 
-  it.skip('assertions below are valid for synchronous .map()', () => {
+  it.skip('assertions below are valid for synchronous .filter()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
     const mapper = jest.fn().mockImplementation(pushDuplicate);
 
@@ -102,5 +103,17 @@ describe('asyncFilterStrict()', () => {
     const result = await asyncFilterStrict(inputArr, filter);
 
     expect(result).toEqual([3, 4, 5, 6, 7, 8, 9, 10]);
+  });
+
+  it.skip('assertions below are valid for synchronous .filter()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => inputArr.filter(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncFilterStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });
 });

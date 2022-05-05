@@ -6,6 +6,7 @@ import {
   largerThanTwo,
   largerThanTwoInRandomTime,
   makeDelayed,
+  throws,
 } from '../test-utils';
 
 describe('asyncFilter()', () => {
@@ -73,5 +74,17 @@ describe('asyncFilter()', () => {
     const result = await asyncFilter(inputArr, filter);
 
     expect(result).toEqual([3, 4, 5, 6, 7, 8, 9, 10]);
+  });
+
+  it.skip('assertions below are valid for synchronous .filter()', () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    expect(() => inputArr.filter(mapper)).toThrow('Some error');
+  });
+
+  it('throws if function passed throws', async () => {
+    const mapper = jest.fn().mockImplementation(throws);
+
+    await expect(() => asyncFilter(inputArr, mapper)).rejects.toThrow('Some error');
   });
 });
