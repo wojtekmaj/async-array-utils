@@ -1,4 +1,4 @@
-import asyncMapStrict from './map_strict';
+import asyncMap from './map';
 
 import {
   doubleInputArr,
@@ -7,22 +7,14 @@ import {
   getTimer,
   inputArr,
   makeDelayed,
-  makePushDuplicate,
-  makePushDuplicateInRandomTime,
   throws,
 } from '../test-utils';
 
-describe('asyncMapStrict()', () => {
+describe('asyncMap()', () => {
   it('example from README works as described', async () => {
-    const indexes = [];
-
-    const asyncMappedArr = await asyncMapStrict([1, 2, 3], async (el, index) => {
-      indexes.push(index);
-      return el * 2;
-    }); // [2, 4, 6]
+    const asyncMappedArr = await asyncMap([1, 2, 3], async (el) => el * 2); // [2, 4, 6]
 
     expect(asyncMappedArr).toEqual([2, 4, 6]);
-    expect(indexes).toEqual([0, 1, 2]);
   });
 
   it('takes exactly the time necessary to execute', async () => {
@@ -32,15 +24,15 @@ describe('asyncMapStrict()', () => {
 
     timer.start();
 
-    await asyncMapStrict(
+    await asyncMap(
       [1, 2, 3],
       makeDelayed((el) => el * 2, delay),
     );
 
     const timeElapsed = timer.stop();
 
-    expect(timeElapsed).toBeGreaterThanOrEqual(delay * 3);
-    expect(timeElapsed).toBeLessThan(delay * 1.25 * 3);
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay);
+    expect(timeElapsed).toBeLessThan(delay * 1.25);
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
@@ -59,7 +51,7 @@ describe('asyncMapStrict()', () => {
   it('maps values properly', async () => {
     const mapper = jest.fn().mockImplementation(duplicateInRandomTime);
 
-    await asyncMapStrict(inputArr, mapper);
+    await asyncMap(inputArr, mapper);
 
     expect.assertions(1 + inputArr.length);
 
@@ -67,26 +59,6 @@ describe('asyncMapStrict()', () => {
     inputArr.forEach((el, idx) => {
       expect(mapper).toHaveBeenCalledWith(el, idx, inputArr);
     });
-  });
-
-  it.skip('assertions below are valid for synchronous .map()', () => {
-    const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
-
-    inputArr.map(mapper);
-
-    expect(mapper).toHaveBeenCalledTimes(inputArr.length);
-    expect(arr).toEqual(doubleInputArr);
-  });
-
-  it('maps values properly with side effects', async () => {
-    const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
-
-    await asyncMapStrict(inputArr, mapper);
-
-    expect(mapper).toHaveBeenCalledTimes(inputArr.length);
-    expect(arr).toEqual(doubleInputArr);
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
@@ -100,7 +72,7 @@ describe('asyncMapStrict()', () => {
   it('returns result properly', async () => {
     const mapper = jest.fn().mockImplementation(duplicateInRandomTime);
 
-    const result = await asyncMapStrict(inputArr, mapper);
+    const result = await asyncMap(inputArr, mapper);
 
     expect(result).toEqual(doubleInputArr);
   });
@@ -114,6 +86,21 @@ describe('asyncMapStrict()', () => {
   it('throws if function passed throws', async () => {
     const mapper = jest.fn().mockImplementation(throws);
 
-    await expect(() => asyncMapStrict(inputArr, mapper)).rejects.toThrow('Some error');
+    await expect(() => asyncMap(inputArr, mapper)).rejects.toThrow('Some error');
+  });
+
+  it('returns type true[] given function that returns type Promise<true>', async () => {
+    async function stringInRandomTime() {
+      return new Promise<string>((resolve) =>
+        setTimeout(() => {
+          resolve('foo');
+        }, Math.random() * 100),
+      );
+    }
+
+    // @ts-expect-no-error
+    const result: string[] = await asyncMap([1, 2, 3], stringInRandomTime);
+
+    expect(result).toEqual(['foo', 'foo', 'foo']);
   });
 });

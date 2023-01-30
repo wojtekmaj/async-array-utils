@@ -87,4 +87,22 @@ describe('asyncFilter()', () => {
 
     await expect(() => asyncFilter(inputArr, mapper)).rejects.toThrow('Some error');
   });
+
+  it('returns type T[] given function that returns type Promise<boolean>', async () => {
+    // @ts-expect-no-error
+    const result: number[] = await asyncFilter(inputArr, largerThanTwoInRandomTime);
+  });
+
+  it('returns type never[] given function that returns type Promise<false>', async () => {
+    async function falseInRandomTime() {
+      return new Promise<false>((resolve) =>
+        setTimeout(() => {
+          resolve(false);
+        }, Math.random() * 100),
+      );
+    }
+
+    // @ts-expect-no-error
+    const result: never[] = await asyncFilter(inputArr, falseInRandomTime);
+  });
 });

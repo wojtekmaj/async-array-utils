@@ -1,6 +1,9 @@
-export default function asyncMapStrict(arr, fn) {
+export default function asyncMapStrict<T, U>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<U>,
+): Promise<U[]> {
   return new Promise((resolve, reject) => {
-    const result = [];
+    const result: U[] = [];
     arr
       .reduce(
         (promise, cur, idx) =>

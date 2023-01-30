@@ -14,7 +14,7 @@ import {
 
 describe('asyncFilterStrict()', () => {
   it('example from README works as described', async () => {
-    const indexes = [];
+    const indexes: number[] = [];
 
     const asyncFilteredArr = await asyncFilterStrict([1, 2, 3], async (el, index) => {
       indexes.push(index);
@@ -115,5 +115,23 @@ describe('asyncFilterStrict()', () => {
     const mapper = jest.fn().mockImplementation(throws);
 
     await expect(() => asyncFilterStrict(inputArr, mapper)).rejects.toThrow('Some error');
+  });
+
+  it('returns type T[] given function that returns type Promise<boolean>', async () => {
+    // @ts-expect-no-error
+    const result: number[] = await asyncFilterStrict(inputArr, largerThanTwoInRandomTime);
+  });
+
+  it('returns type never[] given function that returns type Promise<false>', async () => {
+    async function falseInRandomTime() {
+      return new Promise<false>((resolve) =>
+        setTimeout(() => {
+          resolve(false);
+        }, Math.random() * 100),
+      );
+    }
+
+    // @ts-expect-no-error
+    const result: never[] = await asyncFilterStrict(inputArr, falseInRandomTime);
   });
 });

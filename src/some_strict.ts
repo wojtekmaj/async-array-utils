@@ -1,12 +1,27 @@
 import asyncForEachStrict from './forEach_strict';
 
-export default function asyncSomeStrict(arr, fn) {
-  let resolved;
+function asyncSomeStrict<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<true>,
+): Promise<true>;
+function asyncSomeStrict<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<false>,
+): Promise<false>;
+function asyncSomeStrict<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<boolean>,
+): Promise<boolean>;
+function asyncSomeStrict<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<boolean>,
+): Promise<boolean> {
+  let resolved: boolean;
   return new Promise((resolve, reject) => {
     asyncForEachStrict(
       arr,
       (cur, idx, arr2) =>
-        new Promise((resolve2, reject2) => {
+        new Promise<void>((resolve2, reject2) => {
           if (resolved) {
             return;
           }
@@ -31,3 +46,5 @@ export default function asyncSomeStrict(arr, fn) {
       });
   });
 }
+
+export default asyncSomeStrict;
