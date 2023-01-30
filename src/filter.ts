@@ -1,9 +1,17 @@
 import asyncForEach from './forEach';
 
-export default function asyncFilter<T>(
+function asyncFilter<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<false>,
+): Promise<never[]>;
+function asyncFilter<T>(
   arr: T[],
   fn: (cur: T, idx: number, arr: T[]) => Promise<boolean>,
-): Promise<T[]> {
+): Promise<T[]>;
+function asyncFilter<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<boolean>,
+): Promise<T[] | never[]> {
   const result: T[] = [];
 
   return asyncForEach<T, void>(
@@ -21,3 +29,5 @@ export default function asyncFilter<T>(
       }),
   ).then(() => result.filter((cur, idx) => idx in result));
 }
+
+export default asyncFilter;

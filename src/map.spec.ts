@@ -88,4 +88,19 @@ describe('asyncMap()', () => {
 
     await expect(() => asyncMap(inputArr, mapper)).rejects.toThrow('Some error');
   });
+
+  it('returns type true[] given function that returns type Promise<true>', async () => {
+    async function stringInRandomTime() {
+      return new Promise<string>((resolve) =>
+        setTimeout(() => {
+          resolve('foo');
+        }, Math.random() * 100),
+      );
+    }
+
+    // @ts-expect-no-error
+    const result: string[] = await asyncMap([1, 2, 3], stringInRandomTime);
+
+    expect(result).toEqual(['foo', 'foo', 'foo']);
+  });
 });

@@ -1,20 +1,20 @@
 import asyncForEachStrict from './forEach_strict';
 
-export default function asyncReduce<T>(
+function asyncReduce<T>(
   arr: T[],
   fn: (previousValue: T, currentValue: T, currentIndex: number) => Promise<T>,
 ): Promise<T>;
-export default function asyncReduce<T>(
+function asyncReduce<T>(
   arr: T[],
   fn: (previousValue: T, currentValue: T, currentIndex: number) => Promise<T>,
   initialValue: T,
 ): Promise<T>;
-export default function asyncReduce<T, U>(
+function asyncReduce<T, U>(
   arr: T[],
   fn: (previousValue: U, currentValue: T, currentIndex: number) => Promise<U>,
   initialValue: U,
 ): Promise<U>;
-export default function asyncReduce<T, U>(
+function asyncReduce<T, U>(
   arr: T[],
   fn: (previousValue: T | U | undefined, currentValue: T, currentIndex: number) => Promise<T | U>,
   initialValue?: T | U,
@@ -40,3 +40,5 @@ export default function asyncReduce<T, U>(
       .catch(reject);
   });
 }
+
+export default asyncReduce;

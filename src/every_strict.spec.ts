@@ -150,4 +150,41 @@ describe('asyncEveryStrict()', () => {
 
     await expect(() => asyncEveryStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });
+
+  it('returns type boolean given function that returns type Promise<boolean>', async () => {
+    // @ts-expect-no-error
+    const result: boolean = await asyncEveryStrict(inputArr, largerOrEqualThanZeroInRandomTime);
+
+    expect(typeof result).toBe('boolean');
+  });
+
+  it('returns type true given function that returns type Promise<true>', async () => {
+    async function trueInRandomTime() {
+      return new Promise<true>((resolve) =>
+        setTimeout(() => {
+          resolve(true);
+        }, Math.random() * 100),
+      );
+    }
+
+    // @ts-expect-no-error
+    const result: true = await asyncEveryStrict(inputArr, trueInRandomTime);
+
+    expect(result).toBe(true);
+  });
+
+  it('returns type false given function that returns type Promise<false>', async () => {
+    async function falseInRandomTime() {
+      return new Promise<false>((resolve) =>
+        setTimeout(() => {
+          resolve(false);
+        }, Math.random() * 100),
+      );
+    }
+
+    // @ts-expect-no-error
+    const result: false = await asyncEveryStrict(inputArr, falseInRandomTime);
+
+    expect(result).toBe(false);
+  });
 });
