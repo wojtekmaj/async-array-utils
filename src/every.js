@@ -1,6 +1,6 @@
 import asyncForEach from './forEach';
 
-export default function asyncSome(arr, fn) {
+export default function asyncEvery(arr, fn) {
   let resolved;
   return new Promise((resolve, reject) => {
     asyncForEach(

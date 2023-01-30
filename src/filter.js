@@ -1,6 +1,6 @@
 import asyncForEach from './forEach';
 
-export default function asyncSome(arr, fn) {
+export default function asyncFilter(arr, fn) {
   const result = [];
 
   return asyncForEach(
