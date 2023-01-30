@@ -18,7 +18,7 @@ const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
 
 describe('asyncSomeStrict()', () => {
   it('example from README works as described', async () => {
-    const indexes = [];
+    const indexes: number[] = [];
 
     const largerThanZero = await asyncSomeStrict([1, 2, 3], async (el, index) => {
       indexes.push(index);

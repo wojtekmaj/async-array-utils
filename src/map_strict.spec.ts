@@ -14,7 +14,7 @@ import {
 
 describe('asyncMapStrict()', () => {
   it('example from README works as described', async () => {
-    const indexes = [];
+    const indexes: number[] = [];
 
     const asyncMappedArr = await asyncMapStrict([1, 2, 3], async (el, index) => {
       indexes.push(index);

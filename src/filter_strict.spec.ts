@@ -14,7 +14,7 @@ import {
 
 describe('asyncFilterStrict()', () => {
   it('example from README works as described', async () => {
-    const indexes = [];
+    const indexes: number[] = [];
 
     const asyncFilteredArr = await asyncFilterStrict([1, 2, 3], async (el, index) => {
       indexes.push(index);

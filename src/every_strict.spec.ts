@@ -12,12 +12,12 @@ import {
   throws,
 } from '../test-utils';
 
-function largerOrEqualThanZero(x) {
+function largerOrEqualThanZero(x: number) {
   return x >= 0;
 }
 
-function largerOrEqualThanZeroInRandomTime(x) {
-  return new Promise((resolve) =>
+function largerOrEqualThanZeroInRandomTime(x: number) {
+  return new Promise<boolean>((resolve) =>
     setTimeout(() => {
       resolve(x >= 0);
     }, Math.random() * 100),
@@ -26,7 +26,7 @@ function largerOrEqualThanZeroInRandomTime(x) {
 
 describe('asyncEveryStrict()', () => {
   it('example from README works as described', async () => {
-    const indexes = [];
+    const indexes: number[] = [];
 
     const largerThanZero = await asyncEveryStrict([1, 2, 3], async (el, index) => {
       indexes.push(index);

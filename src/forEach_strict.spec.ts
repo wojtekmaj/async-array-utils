@@ -12,7 +12,7 @@ import {
 describe('asyncForEachStrict()', () => {
   it('example from README works as described', async () => {
     const consoleLog = jest.fn();
-    const indexes = [];
+    const indexes: number[] = [];
 
     await asyncForEachStrict([1, 2, 3], async (el, index) => {
       indexes.push(index);

@@ -1,19 +1,22 @@
 import asyncForEach from './forEach';
 
-export default function asyncSome(arr, fn) {
-  let resolved;
+export default function asyncEvery<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<boolean>,
+): Promise<boolean> {
+  let resolved: boolean;
   return new Promise((resolve, reject) => {
     asyncForEach(
       arr,
       (cur, idx, arr2) =>
-        new Promise((resolve2, reject2) => {
+        new Promise<void>((resolve2, reject2) => {
           if (resolved) {
             return;
           }
           fn(cur, idx, arr2)
             .then((result) => {
-              if (result) {
-                resolve(true);
+              if (!result) {
+                resolve(false);
                 resolved = true;
               }
               resolve2();
@@ -22,7 +25,7 @@ export default function asyncSome(arr, fn) {
         }),
     )
       .then(() => {
-        resolve(false);
+        resolve(true);
         resolved = true;
       })
       .catch((error) => {

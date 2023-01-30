@@ -9,12 +9,12 @@ import {
   throws,
 } from '../test-utils';
 
-function largerOrEqualThanZero(x) {
+function largerOrEqualThanZero(x: number) {
   return x >= 0;
 }
 
-function largerOrEqualThanZeroInRandomTime(x) {
-  return new Promise((resolve) =>
+function largerOrEqualThanZeroInRandomTime(x: number) {
+  return new Promise<boolean>((resolve) =>
     setTimeout(() => {
       resolve(x >= 0);
     }, Math.random() * 100),

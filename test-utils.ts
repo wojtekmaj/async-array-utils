@@ -3,7 +3,7 @@ export function getRandomTime() {
 }
 
 export function getTimer() {
-  let startTime;
+  let startTime: Date;
 
   function start() {
     startTime = new Date();
@@ -12,54 +12,57 @@ export function getTimer() {
   function stop() {
     const endTime = new Date();
 
-    return endTime - startTime;
+    return endTime.getTime() - startTime.getTime();
   }
 
   return { start, stop };
 }
 
-export function makeDelayed(fn, delay = getRandomTime()) {
-  return function delayedFunction(x) {
+export function makeDelayed<T extends any[], R>(
+  fn: (...args: T) => R,
+  delay = getRandomTime(),
+): (...args: T) => Promise<R> {
+  return function delayedFunction(...args) {
     return new Promise((resolve) =>
       setTimeout(() => {
-        resolve(fn(x));
+        resolve(fn(...args));
       }, delay),
     );
   };
 }
 
-export function duplicate(x) {
+export function duplicate(x: number) {
   return x * 2;
 }
 
 export const duplicateInRandomTime = makeDelayed(duplicate);
 
-export function largerThanTwo(x) {
+export function largerThanTwo(x: Number) {
   return x > 2;
 }
 
 export const largerThanTwoInRandomTime = makeDelayed(largerThanTwo);
 
-export function largerThanOneHundred(x) {
+export function largerThanOneHundred(x: number) {
   return x > 100;
 }
 
 export const largerThanOneHundredInRandomTime = makeDelayed(largerThanOneHundred);
 
-export function makePushDuplicate() {
-  const arr = [];
+export function makePushDuplicate(): [number[], (x: number) => void] {
+  const arr: number[] = [];
 
-  function pushDuplicate(x) {
+  function pushDuplicate(x: number) {
     arr.push(x * 2);
   }
 
   return [arr, pushDuplicate];
 }
 
-export function makePushDuplicateInRandomTime() {
-  const arr = [];
+export function makePushDuplicateInRandomTime(): [number[], (x: number) => Promise<void>] {
+  const arr: number[] = [];
 
-  async function pushDuplicate(x) {
+  async function pushDuplicate(x: number) {
     arr.push(await duplicateInRandomTime(x));
   }
 

@@ -1,19 +1,22 @@
 import asyncForEachStrict from './forEach_strict';
 
-export default function asyncEveryStrict(arr, fn) {
-  let resolved;
+export default function asyncSomeStrict<T>(
+  arr: T[],
+  fn: (cur: T, idx: number, arr: T[]) => Promise<boolean>,
+): Promise<boolean> {
+  let resolved: boolean;
   return new Promise((resolve, reject) => {
     asyncForEachStrict(
       arr,
       (cur, idx, arr2) =>
-        new Promise((resolve2, reject2) => {
+        new Promise<void>((resolve2, reject2) => {
           if (resolved) {
             return;
           }
           fn(cur, idx, arr2)
             .then((result) => {
-              if (!result) {
-                resolve(false);
+              if (result) {
+                resolve(true);
                 resolved = true;
               }
               resolve2();
@@ -22,7 +25,7 @@ export default function asyncEveryStrict(arr, fn) {
         }),
     )
       .then(() => {
-        resolve(true);
+        resolve(false);
         resolved = true;
       })
       .catch((error) => {
