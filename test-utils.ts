@@ -37,7 +37,7 @@ export function duplicate(x: number) {
 
 export const duplicateInRandomTime = makeDelayed(duplicate);
 
-export function largerThanTwo(x: Number) {
+export function largerThanTwo(x: number) {
   return x > 2;
 }
 
