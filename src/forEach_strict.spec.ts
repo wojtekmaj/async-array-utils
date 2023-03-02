@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncForEachStrict from './forEach_strict';
 import {
   doubleInputArr,
@@ -11,7 +12,7 @@ import {
 
 describe('asyncForEachStrict()', () => {
   it('example from README works as described', async () => {
-    const consoleLog = jest.fn();
+    const consoleLog = vi.fn();
     const indexes: number[] = [];
 
     await asyncForEachStrict([1, 2, 3], async (el, index) => {
@@ -47,7 +48,7 @@ describe('asyncForEachStrict()', () => {
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     inputArr.forEach(mapper);
 
@@ -61,7 +62,7 @@ describe('asyncForEachStrict()', () => {
 
   it('iterates through an array properly', async () => {
     const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     await asyncForEachStrict(inputArr, mapper);
 
@@ -75,7 +76,7 @@ describe('asyncForEachStrict()', () => {
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     inputArr.forEach(mapper);
 
@@ -85,7 +86,7 @@ describe('asyncForEachStrict()', () => {
 
   it('iterates through an array properly with side effects', async () => {
     const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     await asyncForEachStrict(inputArr, mapper);
 
@@ -95,7 +96,7 @@ describe('asyncForEachStrict()', () => {
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
     const [, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     const result = inputArr.forEach(mapper);
 
@@ -104,7 +105,7 @@ describe('asyncForEachStrict()', () => {
 
   it('returns undefined', async () => {
     const [, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     const result = await asyncForEachStrict(inputArr, mapper);
 
@@ -112,13 +113,13 @@ describe('asyncForEachStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.forEach(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncForEachStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });

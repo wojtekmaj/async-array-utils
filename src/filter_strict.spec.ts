@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncFilterStrict from './filter_strict';
 
 import {
@@ -44,7 +45,7 @@ describe('asyncFilterStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .filter()', () => {
-    const filter = jest.fn().mockImplementation(largerThanTwo);
+    const filter = vi.fn().mockImplementation(largerThanTwo);
 
     inputArr.filter(filter);
 
@@ -57,7 +58,7 @@ describe('asyncFilterStrict()', () => {
   });
 
   it('iterates over values properly', async () => {
-    const filter = jest.fn().mockImplementation(largerThanTwoInRandomTime);
+    const filter = vi.fn().mockImplementation(largerThanTwoInRandomTime);
 
     await asyncFilterStrict(inputArr, filter);
 
@@ -71,7 +72,7 @@ describe('asyncFilterStrict()', () => {
 
   it.skip('assertions below are valid for synchronous .filter()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     inputArr.filter(mapper);
 
@@ -81,7 +82,7 @@ describe('asyncFilterStrict()', () => {
 
   it('iterates through an array properly with side effects', async () => {
     const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     await asyncFilterStrict(inputArr, mapper);
 
@@ -90,7 +91,7 @@ describe('asyncFilterStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .filter()', () => {
-    const filter = jest.fn().mockImplementation(largerThanTwo);
+    const filter = vi.fn().mockImplementation(largerThanTwo);
 
     const result = inputArr.filter(filter);
 
@@ -98,7 +99,7 @@ describe('asyncFilterStrict()', () => {
   });
 
   it('filters array properly', async () => {
-    const filter = jest.fn().mockImplementation(largerThanTwoInRandomTime);
+    const filter = vi.fn().mockImplementation(largerThanTwoInRandomTime);
 
     const result = await asyncFilterStrict(inputArr, filter);
 
@@ -106,13 +107,13 @@ describe('asyncFilterStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .filter()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.filter(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncFilterStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });

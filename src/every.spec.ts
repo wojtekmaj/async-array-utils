@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncEvery from './every';
 
 import {
@@ -47,7 +48,7 @@ describe('asyncEvery()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZero);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZero);
 
     inputArr.every(mapper);
 
@@ -60,7 +61,7 @@ describe('asyncEvery()', () => {
   });
 
   it('iterates over values properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
 
     await asyncEvery(inputArr, mapper);
 
@@ -73,7 +74,7 @@ describe('asyncEvery()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZero);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZero);
 
     const result = inputArr.every(mapper);
 
@@ -81,7 +82,7 @@ describe('asyncEvery()', () => {
   });
 
   it('returns truthy result properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
 
     const result = await asyncEvery(inputArr, mapper);
 
@@ -89,7 +90,7 @@ describe('asyncEvery()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(largerThanOneHundred);
+    const mapper = vi.fn().mockImplementation(largerThanOneHundred);
 
     const result = inputArr.every(mapper);
 
@@ -97,7 +98,7 @@ describe('asyncEvery()', () => {
   });
 
   it('returns falsy result properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerThanOneHundredInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerThanOneHundredInRandomTime);
 
     const result = await asyncEvery(inputArr, mapper);
 
@@ -105,13 +106,13 @@ describe('asyncEvery()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.every(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncEvery(inputArr, mapper)).rejects.toThrow('Some error');
   });

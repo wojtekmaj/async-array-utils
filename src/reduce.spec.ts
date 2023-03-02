@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncReduce from './reduce';
 
 import { getTimer, makeDelayed, throws } from '../test-utils';
@@ -29,7 +30,7 @@ describe('asyncReduce()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .reduce()', () => {
-    const mapper = jest.fn().mockImplementation((temp, cur, idx) => [...temp, `${idx}:${cur}`]);
+    const mapper = vi.fn().mockImplementation((temp, cur, idx) => [...temp, `${idx}:${cur}`]);
 
     const result = ['a', 'b', 'c'].reduce(mapper, ['start']);
 
@@ -38,9 +39,7 @@ describe('asyncReduce()', () => {
   });
 
   it('reduces an array properly', async () => {
-    const mapper = jest
-      .fn()
-      .mockImplementation(async (temp, cur, idx) => [...temp, `${idx}:${cur}`]);
+    const mapper = vi.fn().mockImplementation(async (temp, cur, idx) => [...temp, `${idx}:${cur}`]);
 
     const result = await asyncReduce(['a', 'b', 'c'], mapper, ['start']);
 
@@ -49,13 +48,13 @@ describe('asyncReduce()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .reduce()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => ['a', 'b', 'c'].reduce(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncReduce(['a', 'b', 'c'], mapper)).rejects.toThrow('Some error');
   });
