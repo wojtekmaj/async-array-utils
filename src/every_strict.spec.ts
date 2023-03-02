@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncEveryStrict from './every_strict';
 
 import {
@@ -56,7 +57,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZero);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZero);
 
     inputArr.every(mapper);
 
@@ -69,7 +70,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it('iterates over values properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
 
     await asyncEveryStrict(inputArr, mapper);
 
@@ -83,7 +84,7 @@ describe('asyncEveryStrict()', () => {
 
   it.skip('assertions below are valid for synchronous .every()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation((el) => {
+    const mapper = vi.fn().mockImplementation((el) => {
       pushDuplicate(el);
       return largerOrEqualThanZero(el);
     });
@@ -96,7 +97,7 @@ describe('asyncEveryStrict()', () => {
 
   it('iterates through an array properly with side effects', async () => {
     const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(async (el) => {
+    const mapper = vi.fn().mockImplementation(async (el) => {
       await pushDuplicate(el);
       return largerOrEqualThanZero(el);
     });
@@ -108,7 +109,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZero);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZero);
 
     const result = inputArr.every(mapper);
 
@@ -116,7 +117,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it('returns truthy result properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerOrEqualThanZeroInRandomTime);
 
     const result = await asyncEveryStrict(inputArr, mapper);
 
@@ -124,7 +125,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(largerThanOneHundred);
+    const mapper = vi.fn().mockImplementation(largerThanOneHundred);
 
     const result = inputArr.every(mapper);
 
@@ -132,7 +133,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it('returns falsy result properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerThanOneHundredInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerThanOneHundredInRandomTime);
 
     const result = await asyncEveryStrict(inputArr, mapper);
 
@@ -140,13 +141,13 @@ describe('asyncEveryStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .every()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.every(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncEveryStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });

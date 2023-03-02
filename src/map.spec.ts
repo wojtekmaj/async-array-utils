@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncMap from './map';
 
 import {
@@ -36,7 +37,7 @@ describe('asyncMap()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
-    const mapper = jest.fn().mockImplementation(duplicate);
+    const mapper = vi.fn().mockImplementation(duplicate);
 
     inputArr.map(mapper);
 
@@ -49,7 +50,7 @@ describe('asyncMap()', () => {
   });
 
   it('maps values properly', async () => {
-    const mapper = jest.fn().mockImplementation(duplicateInRandomTime);
+    const mapper = vi.fn().mockImplementation(duplicateInRandomTime);
 
     await asyncMap(inputArr, mapper);
 
@@ -62,7 +63,7 @@ describe('asyncMap()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
-    const mapper = jest.fn().mockImplementation(duplicate);
+    const mapper = vi.fn().mockImplementation(duplicate);
 
     const result = inputArr.map(mapper);
 
@@ -70,7 +71,7 @@ describe('asyncMap()', () => {
   });
 
   it('returns result properly', async () => {
-    const mapper = jest.fn().mockImplementation(duplicateInRandomTime);
+    const mapper = vi.fn().mockImplementation(duplicateInRandomTime);
 
     const result = await asyncMap(inputArr, mapper);
 
@@ -78,13 +79,13 @@ describe('asyncMap()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.map(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncMap(inputArr, mapper)).rejects.toThrow('Some error');
   });

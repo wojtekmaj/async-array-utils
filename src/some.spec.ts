@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncSome from './some';
 
 import {
@@ -39,7 +40,7 @@ describe('asyncSome()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .some()', () => {
-    const mapper = jest.fn().mockImplementation(largerThanTwo);
+    const mapper = vi.fn().mockImplementation(largerThanTwo);
 
     inputArr.some(mapper);
 
@@ -51,7 +52,7 @@ describe('asyncSome()', () => {
   });
 
   it('iterates over values properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerThanTwoInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerThanTwoInRandomTime);
 
     await asyncSome(inputArr, mapper);
 
@@ -63,7 +64,7 @@ describe('asyncSome()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .some()', () => {
-    const mapper = jest.fn().mockImplementation(largerThanTwo);
+    const mapper = vi.fn().mockImplementation(largerThanTwo);
 
     const result = inputArr.some(mapper);
 
@@ -71,7 +72,7 @@ describe('asyncSome()', () => {
   });
 
   it('returns truthy result properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerThanTwoInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerThanTwoInRandomTime);
 
     const result = await asyncSome(inputArr, mapper);
 
@@ -79,7 +80,7 @@ describe('asyncSome()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .some()', () => {
-    const mapper = jest.fn().mockImplementation(largerThanOneHundred);
+    const mapper = vi.fn().mockImplementation(largerThanOneHundred);
 
     const result = inputArr.some(mapper);
 
@@ -87,7 +88,7 @@ describe('asyncSome()', () => {
   });
 
   it('returns falsy result properly', async () => {
-    const mapper = jest.fn().mockImplementation(largerThanOneHundredInRandomTime);
+    const mapper = vi.fn().mockImplementation(largerThanOneHundredInRandomTime);
 
     const result = await asyncSome(inputArr, mapper);
 
@@ -95,13 +96,13 @@ describe('asyncSome()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .some()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.some(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncSome(inputArr, mapper)).rejects.toThrow('Some error');
   });

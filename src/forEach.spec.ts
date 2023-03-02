@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncForEach from './forEach';
 
 import {
@@ -11,7 +12,7 @@ import {
 
 describe('asyncForEach()', () => {
   it('example from README works as described', async () => {
-    const consoleLog = jest.fn();
+    const consoleLog = vi.fn();
 
     await asyncForEach([1, 2, 3], async (el) => {
       consoleLog(el * 2);
@@ -43,7 +44,7 @@ describe('asyncForEach()', () => {
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     inputArr.forEach(mapper);
 
@@ -57,7 +58,7 @@ describe('asyncForEach()', () => {
 
   it('iterates through an array properly', async () => {
     const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     await asyncForEach(inputArr, mapper);
 
@@ -71,7 +72,7 @@ describe('asyncForEach()', () => {
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
     const [, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     const result = inputArr.forEach(mapper);
 
@@ -80,7 +81,7 @@ describe('asyncForEach()', () => {
 
   it('returns undefined', async () => {
     const [, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     const result = await asyncForEach(inputArr, mapper);
 
@@ -88,13 +89,13 @@ describe('asyncForEach()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.forEach(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncForEach(inputArr, mapper)).rejects.toThrow('Some error');
   });

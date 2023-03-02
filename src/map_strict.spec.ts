@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import asyncMapStrict from './map_strict';
 
 import {
@@ -44,7 +45,7 @@ describe('asyncMapStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
-    const mapper = jest.fn().mockImplementation(duplicate);
+    const mapper = vi.fn().mockImplementation(duplicate);
 
     inputArr.map(mapper);
 
@@ -57,7 +58,7 @@ describe('asyncMapStrict()', () => {
   });
 
   it('maps values properly', async () => {
-    const mapper = jest.fn().mockImplementation(duplicateInRandomTime);
+    const mapper = vi.fn().mockImplementation(duplicateInRandomTime);
 
     await asyncMapStrict(inputArr, mapper);
 
@@ -71,7 +72,7 @@ describe('asyncMapStrict()', () => {
 
   it.skip('assertions below are valid for synchronous .map()', () => {
     const [arr, pushDuplicate] = makePushDuplicate();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     inputArr.map(mapper);
 
@@ -81,7 +82,7 @@ describe('asyncMapStrict()', () => {
 
   it('maps values properly with side effects', async () => {
     const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
-    const mapper = jest.fn().mockImplementation(pushDuplicate);
+    const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     await asyncMapStrict(inputArr, mapper);
 
@@ -90,7 +91,7 @@ describe('asyncMapStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
-    const mapper = jest.fn().mockImplementation(duplicate);
+    const mapper = vi.fn().mockImplementation(duplicate);
 
     const result = inputArr.map(mapper);
 
@@ -98,7 +99,7 @@ describe('asyncMapStrict()', () => {
   });
 
   it('returns result properly', async () => {
-    const mapper = jest.fn().mockImplementation(duplicateInRandomTime);
+    const mapper = vi.fn().mockImplementation(duplicateInRandomTime);
 
     const result = await asyncMapStrict(inputArr, mapper);
 
@@ -106,13 +107,13 @@ describe('asyncMapStrict()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .map()', () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     expect(() => inputArr.map(mapper)).toThrow('Some error');
   });
 
   it('throws if function passed throws', async () => {
-    const mapper = jest.fn().mockImplementation(throws);
+    const mapper = vi.fn().mockImplementation(throws);
 
     await expect(() => asyncMapStrict(inputArr, mapper)).rejects.toThrow('Some error');
   });
