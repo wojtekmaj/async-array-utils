@@ -120,6 +120,7 @@ describe('asyncFilterStrict()', () => {
 
   it('returns type T[] given function that returns type Promise<boolean>', async () => {
     // @ts-expect-no-error
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const result: number[] = await asyncFilterStrict(inputArr, largerThanTwoInRandomTime);
   });
 
@@ -133,6 +134,7 @@ describe('asyncFilterStrict()', () => {
     }
 
     // @ts-expect-no-error
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const result: never[] = await asyncFilterStrict(inputArr, falseInRandomTime);
   });
 });
