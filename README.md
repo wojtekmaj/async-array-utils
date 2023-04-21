@@ -21,6 +21,8 @@ A collection of array-related async utilities.
 - [`asyncEveryStrict()`](#asyncEveryStrict)
 - [`asyncFilter()`](#asyncFilter)
 - [`asyncFilterStrict()`](#asyncFilterStrict)
+- [`asyncFind()`](#asyncFind)
+- [`asyncFindIndex()`](#asyncFindIndex)
 - [`asyncForEach()`](#asyncForEach)
 - [`asyncForEachStrict()`](#asyncForEachStrict)
 - [`asyncMap()`](#asyncMap)
@@ -89,6 +91,30 @@ const asyncFilteredArr = await asyncFilterStrict([1, 2, 3], async (el, index) =>
   return el > 1;
 }); // [2, 3]
 console.log(indexes); // [0, 1, 2]
+```
+
+### `asyncFind()`
+
+Returns the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, `undefined` is returned.
+
+#### Sample usage
+
+```js
+import { asyncFind } from '@wojtekmaj/async-array-utils';
+
+const asyncFoundEl = await asyncFind([1, 2, 3], async (el) => el > 1); // 2
+```
+
+### `asyncFindIndex()`
+
+Returns the index of the first element in an array that satisfies the provided testing function. If no elements satisfy the testing function, `-1` is returned.
+
+#### Sample usage
+
+```js
+import { asyncFindIndex } from '@wojtekmaj/async-array-utils';
+
+const asyncFoundIndex = await asyncFindIndex([1, 2, 3], async (el) => el > 1); // 1
 ```
 
 ### `asyncForEach()`

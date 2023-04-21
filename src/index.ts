@@ -1,5 +1,7 @@
 import asyncFilter from './filter';
 import asyncFilterStrict from './filter_strict';
+import asyncFind from './find';
+import asyncFindIndex from './findIndex';
 import asyncForEach from './forEach';
 import asyncForEachStrict from './forEach_strict';
 import asyncEvery from './every';
@@ -13,6 +15,8 @@ import asyncSomeStrict from './some_strict';
 export {
   asyncFilter,
   asyncFilterStrict,
+  asyncFind,
+  asyncFindIndex,
   asyncForEach,
   asyncForEachStrict,
   asyncEvery,

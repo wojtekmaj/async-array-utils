@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import {
   asyncFilter,
   asyncFilterStrict,
+  asyncFind,
+  asyncFindIndex,
   asyncForEach,
   asyncForEachStrict,
   asyncEvery,
@@ -20,6 +22,14 @@ describe('index', () => {
 
   it('has asyncFilterStrict exported properly', () => {
     expect(asyncFilterStrict).toBeInstanceOf(Function);
+  });
+
+  it('has asyncFind exported properly', () => {
+    expect(asyncFind).toBeInstanceOf(Function);
+  });
+
+  it('has asyncFindIndex exported properly', () => {
+    expect(asyncFindIndex).toBeInstanceOf(Function);
   });
 
   it('has asyncForEach exported properly', () => {
