@@ -18,7 +18,7 @@ export function getTimer() {
   return { start, stop };
 }
 
-export function makeDelayed<T extends any[], R>(
+export function makeDelayed<T extends unknown[], R>(
   fn: (...args: T) => R,
   delay = getRandomTime(),
 ): (...args: T) => Promise<R> {
