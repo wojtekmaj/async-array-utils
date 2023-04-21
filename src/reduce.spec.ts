@@ -58,4 +58,50 @@ describe('asyncReduce()', () => {
 
     await expect(() => asyncReduce(['a', 'b', 'c'], mapper)).rejects.toThrow('Some error');
   });
+
+  it('returns type string given function that returns Promise<string> and no initial value', async () => {
+    // @ts-expect-no-error
+    const result: string = await asyncReduce(['a', 'b', 'c'], async (temp, cur) => cur);
+
+    expect(result).toBe('c');
+
+    // Sanity check
+    const resultSync: string = ['a', 'b', 'c'].reduce((temp, cur) => cur);
+
+    expect(resultSync).toBe('c');
+  });
+
+  it('returns type string[] given function that returns Promise<string> and initial value of type string[]', async () => {
+    // @ts-expect-no-error
+    const result: string[] = await asyncReduce(
+      ['a', 'b', 'c'],
+      async (temp, cur) => [...temp, cur],
+      [] as string[],
+    );
+
+    expect(result).toEqual(['a', 'b', 'c']);
+
+    // Sanity check
+    const resultSync: string[] = ['a', 'b', 'c'].reduce(
+      (temp, cur) => [...temp, cur],
+      [] as string[],
+    );
+
+    expect(resultSync).toEqual(['a', 'b', 'c']);
+  });
+
+  it('returns type number[] given function that returns Promise<number> and initial value of type number', async () => {
+    const result: number[] = await asyncReduce(
+      ['a', 'b', 'c'],
+      async (temp, cur, idx) => [...temp, idx],
+      [0],
+    );
+
+    expect(result).toEqual([0, 0, 1, 2]);
+
+    // Sanity check
+    const resultSync: number[] = ['a', 'b', 'c'].reduce((temp, cur, idx) => [...temp, idx], [0]);
+
+    expect(resultSync).toEqual([0, 0, 1, 2]);
+  });
 });
