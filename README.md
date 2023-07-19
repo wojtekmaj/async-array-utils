@@ -9,7 +9,7 @@ A collection of array-related async utilities.
 - Install by executing `npm install @wojtekmaj/async-array-utils` or `yarn add @wojtekmaj/async-array-utils`.
 - Import by adding `import * as asyncArrayUtils from '@wojtekmaj/async-array-utils'`.
 - Do stuff with it!
-  ```js
+  ```ts
   const asyncMappedArr = await asyncMap([1, 2, 3], async (x) => x * 2);
   ```
 
@@ -39,7 +39,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 
 #### Sample usage
 
-```js
+```ts
 import { asyncEvery } from '@wojtekmaj/async-array-utils';
 
 const largerThanZero = await asyncEvery([1, 2, 3], async (el) => el > 0); // true
@@ -51,7 +51,7 @@ Like `asyncEvery()`, but runs iterations non-concurrently.
 
 #### Sample usage
 
-```js
+```ts
 import { asyncEveryStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
@@ -70,7 +70,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 
 #### Sample usage
 
-```js
+```ts
 import { asyncFilter } from '@wojtekmaj/async-array-utils';
 
 const asyncFilteredArr = await asyncFilter([1, 2, 3], async (el) => el > 1); // [2, 3]
@@ -82,7 +82,7 @@ Like `asyncFilter()`, but runs iterations non-concurrently.
 
 #### Sample usage
 
-```js
+```ts
 import { asyncFilterStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
@@ -99,7 +99,7 @@ Returns the first element in the provided array that satisfies the provided test
 
 #### Sample usage
 
-```js
+```ts
 import { asyncFind } from '@wojtekmaj/async-array-utils';
 
 const asyncFoundEl = await asyncFind([1, 2, 3], async (el) => el > 1); // 2
@@ -111,7 +111,7 @@ Returns the index of the first element in an array that satisfies the provided t
 
 #### Sample usage
 
-```js
+```ts
 import { asyncFindIndex } from '@wojtekmaj/async-array-utils';
 
 const asyncFoundIndex = await asyncFindIndex([1, 2, 3], async (el) => el > 1); // 1
@@ -125,7 +125,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 
 #### Sample usage
 
-```js
+```ts
 import { asyncForEach } from '@wojtekmaj/async-array-utils';
 
 await asyncForEach([1, 2, 3], async (el) => {
@@ -139,7 +139,7 @@ Like `asyncForEach()`, but runs iterations non-concurrently.
 
 #### Sample usage
 
-```js
+```ts
 import { asyncForEachStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
@@ -158,7 +158,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 
 #### Sample usage
 
-```js
+```ts
 import { asyncMap } from '@wojtekmaj/async-array-utils';
 
 const asyncMappedArr = await asyncMap([1, 2, 3], async (el) => el * 2); // [2, 4, 6]
@@ -170,7 +170,7 @@ Like `asyncMap()`, but runs iterations non-concurrently.
 
 #### Sample usage
 
-```js
+```ts
 import { asyncMapStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
@@ -187,7 +187,7 @@ Executes a reducer asynchronous function (that you provide) on each element of t
 
 #### Sample usage
 
-```js
+```ts
 import { asyncReduce } from '@wojtekmaj/async-array-utils';
 
 const result = await asyncReduce(
@@ -207,7 +207,7 @@ Note: For optimization purposes, all iterations are ran concurrently. If you rel
 
 #### Sample usage
 
-```js
+```ts
 import { asyncSome } from '@wojtekmaj/async-array-utils';
 
 const largerThanZero = await asyncSome([1, 2, 3], async (el) => el > 0); // true
@@ -219,7 +219,7 @@ Like `asyncSome()`, but runs iterations non-concurrently.
 
 #### Sample usage
 
-```js
+```ts
 import { asyncSomeStrict } from '@wojtekmaj/async-array-utils';
 
 const indexes = [];
