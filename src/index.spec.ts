@@ -13,7 +13,7 @@ import {
   asyncReduce,
   asyncSome,
   asyncSomeStrict,
-} from './index';
+} from './index.js';
 
 describe('index', () => {
   it('has asyncFilter exported properly', () => {

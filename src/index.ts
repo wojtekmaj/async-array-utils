@@ -1,16 +1,16 @@
-import asyncFilter from './filter';
-import asyncFilterStrict from './filter_strict';
-import asyncFind from './find';
-import asyncFindIndex from './findIndex';
-import asyncForEach from './forEach';
-import asyncForEachStrict from './forEach_strict';
-import asyncEvery from './every';
-import asyncEveryStrict from './every_strict';
-import asyncMap from './map';
-import asyncMapStrict from './map_strict';
-import asyncReduce from './reduce';
-import asyncSome from './some';
-import asyncSomeStrict from './some_strict';
+import asyncFilter from './filter.js';
+import asyncFilterStrict from './filter_strict.js';
+import asyncFind from './find.js';
+import asyncFindIndex from './findIndex.js';
+import asyncForEach from './forEach.js';
+import asyncForEachStrict from './forEach_strict.js';
+import asyncEvery from './every.js';
+import asyncEveryStrict from './every_strict.js';
+import asyncMap from './map.js';
+import asyncMapStrict from './map_strict.js';
+import asyncReduce from './reduce.js';
+import asyncSome from './some.js';
+import asyncSomeStrict from './some_strict.js';
 
 export {
   asyncFilter,

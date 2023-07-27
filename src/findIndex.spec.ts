@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncFindIndex from './findIndex';
+import asyncFindIndex from './findIndex.js';
 
 import {
   getTimer,
@@ -10,7 +10,7 @@ import {
   largerThanTwoInRandomTime,
   makeDelayed,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
 

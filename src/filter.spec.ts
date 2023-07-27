@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncFilter from './filter';
+import asyncFilter from './filter.js';
 
 import {
   getTimer,
@@ -8,7 +8,7 @@ import {
   largerThanTwoInRandomTime,
   makeDelayed,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 describe('asyncFilter()', () => {
   it('example from README works as described', async () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncForEachStrict from './forEach_strict';
+import asyncForEachStrict from './forEach_strict.js';
 import {
   doubleInputArr,
   getTimer,
@@ -8,7 +8,7 @@ import {
   makePushDuplicate,
   makePushDuplicateInRandomTime,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 describe('asyncForEachStrict()', () => {
   it('example from README works as described', async () => {

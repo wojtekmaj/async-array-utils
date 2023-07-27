@@ -1,4 +1,4 @@
-import asyncForEach from './forEach';
+import asyncForEach from './forEach.js';
 
 function asyncSome<T>(
   arr: T[],

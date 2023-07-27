@@ -1,4 +1,4 @@
-import asyncMapStrict from './map_strict';
+import asyncMapStrict from './map_strict.js';
 
 export default function asyncForEachStrict<T, U>(
   arr: T[],

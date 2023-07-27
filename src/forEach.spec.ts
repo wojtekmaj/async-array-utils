@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncForEach from './forEach';
+import asyncForEach from './forEach.js';
 
 import {
   getTimer,
@@ -8,7 +8,7 @@ import {
   makePushDuplicate,
   makePushDuplicateInRandomTime,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 describe('asyncForEach()', () => {
   it('example from README works as described', async () => {

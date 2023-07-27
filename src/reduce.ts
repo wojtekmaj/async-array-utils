@@ -1,4 +1,4 @@
-import asyncForEachStrict from './forEach_strict';
+import asyncForEachStrict from './forEach_strict.js';
 
 function asyncReduce<T>(
   arr: T[],
