@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncFilterStrict from './filter_strict';
+import asyncFilterStrict from './filter_strict.js';
 
 import {
   doubleInputArr,
@@ -11,7 +11,7 @@ import {
   makePushDuplicate,
   makePushDuplicateInRandomTime,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 describe('asyncFilterStrict()', () => {
   it('example from README works as described', async () => {

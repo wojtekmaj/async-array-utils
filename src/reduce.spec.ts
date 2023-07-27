@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncReduce from './reduce';
+import asyncReduce from './reduce.js';
 
-import { getTimer, makeDelayed, throws } from '../test-utils';
+import { getTimer, makeDelayed, throws } from '../test-utils.js';
 
 describe('asyncReduce()', () => {
   it('example from README works as described', async () => {

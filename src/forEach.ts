@@ -1,4 +1,4 @@
-import asyncMap from './map';
+import asyncMap from './map.js';
 
 export default function asyncForEach<T, U>(
   arr: T[],

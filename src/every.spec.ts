@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncEvery from './every';
+import asyncEvery from './every.js';
 
 import {
   getTimer,
@@ -8,7 +8,7 @@ import {
   largerThanOneHundredInRandomTime,
   makeDelayed,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 function largerOrEqualThanZero(x: number) {
   return x >= 0;

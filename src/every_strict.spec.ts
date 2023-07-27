@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncEveryStrict from './every_strict';
+import asyncEveryStrict from './every_strict.js';
 
 import {
   doubleInputArr,
@@ -11,7 +11,7 @@ import {
   makePushDuplicate,
   makePushDuplicateInRandomTime,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 function largerOrEqualThanZero(x: number) {
   return x >= 0;

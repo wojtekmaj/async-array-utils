@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncMap from './map';
+import asyncMap from './map.js';
 
 import {
   doubleInputArr,
@@ -9,7 +9,7 @@ import {
   inputArr,
   makeDelayed,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 describe('asyncMap()', () => {
   it('example from README works as described', async () => {

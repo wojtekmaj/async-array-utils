@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import asyncSome from './some';
+import asyncSome from './some.js';
 
 import {
   inputArr,
@@ -10,7 +10,7 @@ import {
   getTimer,
   makeDelayed,
   throws,
-} from '../test-utils';
+} from '../test-utils.js';
 
 const firstElementLargerThanTwo = inputArr.findIndex(largerThanTwo);
 
