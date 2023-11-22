@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/@wojtekmaj/async-array-utils.svg)](https://www.npmjs.com/package/@wojtekmaj/async-array-utils) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/async-array-utils.svg) [![CI](https://github.com/wojtekmaj/async-array-utils/workflows/CI/badge.svg)](https://github.com/wojtekmaj/async-array-utils/actions)
+[![npm](https://img.shields.io/npm/v/@wojtekmaj/async-array-utils.svg)](https://www.npmjs.com/package/@wojtekmaj/async-array-utils) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/async-array-utils.svg) [![CI](https://github.com/wojtekmaj/async-array-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/wojtekmaj/async-array-utils/actions)
 
 # Async-Array-Utils
 
