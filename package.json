@@ -63,5 +63,5 @@
     "url": "git+https://github.com/wojtekmaj/async-array-utils.git"
   },
   "funding": "https://github.com/wojtekmaj/async-array-utils?sponsor=1",
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.1"
 }
