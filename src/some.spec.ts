@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncSome from './some.js';
 
 import {
@@ -108,10 +108,7 @@ describe('asyncSome()', () => {
   });
 
   it('returns type boolean given function that returns type Promise<boolean>', async () => {
-    // @ts-expect-no-error
-    const result: boolean = await asyncSome(inputArr, largerThanOneHundredInRandomTime);
-
-    expect(typeof result).toBe('boolean');
+    assertType<boolean>(await asyncSome(inputArr, largerThanOneHundredInRandomTime));
   });
 
   it('returns type true given function that returns type Promise<true>', async () => {
@@ -123,10 +120,7 @@ describe('asyncSome()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: true = await asyncSome(inputArr, trueInRandomTime);
-
-    expect(result).toBe(true);
+    assertType<true>(await asyncSome(inputArr, trueInRandomTime));
   });
 
   it('returns type false given function that returns type Promise<false>', async () => {
@@ -138,9 +132,6 @@ describe('asyncSome()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: false = await asyncSome(inputArr, falseInRandomTime);
-
-    expect(result).toBe(false);
+    assertType<false>(await asyncSome(inputArr, falseInRandomTime));
   });
 });

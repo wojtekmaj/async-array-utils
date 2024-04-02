@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncMap from './map.js';
 
 import {
@@ -90,7 +90,7 @@ describe('asyncMap()', () => {
     await expect(() => asyncMap(inputArr, mapper)).rejects.toThrow('Some error');
   });
 
-  it('returns type true[] given function that returns type Promise<true>', async () => {
+  it('returns type string[] given function that returns type Promise<string>', async () => {
     async function stringInRandomTime() {
       return new Promise<string>((resolve) =>
         setTimeout(() => {
@@ -99,8 +99,9 @@ describe('asyncMap()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: string[] = await asyncMap([1, 2, 3], stringInRandomTime);
+    const result = await asyncMap([1, 2, 3], stringInRandomTime);
+
+    assertType<string[]>(result);
 
     expect(result).toEqual(['foo', 'foo', 'foo']);
   });

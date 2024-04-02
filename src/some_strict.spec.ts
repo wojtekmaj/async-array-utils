@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncSomeStrict from './some_strict.js';
 
 import {
@@ -139,10 +139,7 @@ describe('asyncSomeStrict()', () => {
   });
 
   it('returns type boolean given function that returns type Promise<boolean>', async () => {
-    // @ts-expect-no-error
-    const result: boolean = await asyncSomeStrict(inputArr, largerThanOneHundredInRandomTime);
-
-    expect(typeof result).toBe('boolean');
+    assertType<boolean>(await asyncSomeStrict(inputArr, largerThanOneHundredInRandomTime));
   });
 
   it('returns type true given function that returns type Promise<true>', async () => {
@@ -154,10 +151,7 @@ describe('asyncSomeStrict()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: true = await asyncSomeStrict(inputArr, trueInRandomTime);
-
-    expect(result).toBe(true);
+    assertType<true>(await asyncSomeStrict(inputArr, trueInRandomTime));
   });
 
   it('returns type false given function that returns type Promise<false>', async () => {
@@ -169,9 +163,6 @@ describe('asyncSomeStrict()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: false = await asyncSomeStrict(inputArr, falseInRandomTime);
-
-    expect(result).toBe(false);
+    assertType<false>(await asyncSomeStrict(inputArr, falseInRandomTime));
   });
 });

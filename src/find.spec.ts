@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncFind from './find.js';
 
 import {
@@ -136,8 +136,9 @@ describe('asyncFind()', () => {
   });
 
   it('returns type T | undefined given function that returns type Promise<boolean>', async () => {
-    // @ts-expect-no-error
-    const result: number | undefined = await asyncFind(inputArr, largerThanTwoInRandomTime);
+    const result = await asyncFind(inputArr, largerThanTwoInRandomTime);
+
+    assertType<number | undefined>(result);
 
     expect(typeof result).toEqual('number');
   });
@@ -151,8 +152,9 @@ describe('asyncFind()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: undefined = await asyncFind(inputArr, falseInRandomTime);
+    const result = await asyncFind(inputArr, falseInRandomTime);
+
+    assertType<undefined>(result);
 
     expect(result).toEqual(undefined);
   });

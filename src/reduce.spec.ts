@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncReduce from './reduce.js';
 
 import { getTimer, makeDelayed, throws } from '../test-utils.js';
@@ -60,47 +60,52 @@ describe('asyncReduce()', () => {
   });
 
   it('returns type string given function that returns Promise<string> and no initial value', async () => {
-    // @ts-expect-no-error
-    const result: string = await asyncReduce(['a', 'b', 'c'], async (temp, cur) => cur);
+    const result = await asyncReduce(['a', 'b', 'c'], async (temp, cur) => cur);
+
+    assertType<string>(result);
 
     expect(result).toBe('c');
 
     // Sanity check
-    const resultSync: string = ['a', 'b', 'c'].reduce((temp, cur) => cur);
+    const resultSync = ['a', 'b', 'c'].reduce((temp, cur) => cur);
+
+    assertType<string>(resultSync);
 
     expect(resultSync).toBe('c');
   });
 
   it('returns type string[] given function that returns Promise<string> and initial value of type string[]', async () => {
-    // @ts-expect-no-error
-    const result: string[] = await asyncReduce(
+    const result = await asyncReduce(
       ['a', 'b', 'c'],
       async (temp, cur) => [...temp, cur],
       [] as string[],
     );
 
+    assertType<string[]>(result);
+
     expect(result).toEqual(['a', 'b', 'c']);
 
     // Sanity check
-    const resultSync: string[] = ['a', 'b', 'c'].reduce(
-      (temp, cur) => [...temp, cur],
-      [] as string[],
-    );
+    const resultSync = ['a', 'b', 'c'].reduce((temp, cur) => [...temp, cur], [] as string[]);
+
+    assertType<string[]>(resultSync);
 
     expect(resultSync).toEqual(['a', 'b', 'c']);
   });
 
   it('returns type number[] given function that returns Promise<number> and initial value of type number', async () => {
-    const result: number[] = await asyncReduce(
-      ['a', 'b', 'c'],
-      async (temp, cur, idx) => [...temp, idx],
-      [0],
-    );
+    const result = await asyncReduce(['a', 'b', 'c'], async (temp, cur, idx) => [...temp, idx], [
+      0,
+    ]);
+
+    assertType<number[]>(result);
 
     expect(result).toEqual([0, 0, 1, 2]);
 
     // Sanity check
-    const resultSync: number[] = ['a', 'b', 'c'].reduce((temp, cur, idx) => [...temp, idx], [0]);
+    const resultSync = ['a', 'b', 'c'].reduce((temp, cur, idx) => [...temp, idx], [0]);
+
+    assertType<number[]>(resultSync);
 
     expect(resultSync).toEqual([0, 0, 1, 2]);
   });

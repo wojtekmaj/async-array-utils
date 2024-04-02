@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncEveryStrict from './every_strict.js';
 
 import {
@@ -153,10 +153,7 @@ describe('asyncEveryStrict()', () => {
   });
 
   it('returns type boolean given function that returns type Promise<boolean>', async () => {
-    // @ts-expect-no-error
-    const result: boolean = await asyncEveryStrict(inputArr, largerOrEqualThanZeroInRandomTime);
-
-    expect(typeof result).toBe('boolean');
+    assertType<boolean>(await asyncEveryStrict(inputArr, largerOrEqualThanZeroInRandomTime));
   });
 
   it('returns type true given function that returns type Promise<true>', async () => {
@@ -168,10 +165,7 @@ describe('asyncEveryStrict()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: true = await asyncEveryStrict(inputArr, trueInRandomTime);
-
-    expect(result).toBe(true);
+    assertType<true>(await asyncEveryStrict(inputArr, trueInRandomTime));
   });
 
   it('returns type false given function that returns type Promise<false>', async () => {
@@ -183,9 +177,6 @@ describe('asyncEveryStrict()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    const result: false = await asyncEveryStrict(inputArr, falseInRandomTime);
-
-    expect(result).toBe(false);
+    assertType<false>(await asyncEveryStrict(inputArr, falseInRandomTime));
   });
 });

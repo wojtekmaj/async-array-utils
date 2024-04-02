@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { assertType, describe, expect, it, vi } from 'vitest';
 import asyncFilterStrict from './filter_strict.js';
 
 import {
@@ -119,9 +119,7 @@ describe('asyncFilterStrict()', () => {
   });
 
   it('returns type T[] given function that returns type Promise<boolean>', async () => {
-    // @ts-expect-no-error
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const result: number[] = await asyncFilterStrict(inputArr, largerThanTwoInRandomTime);
+    assertType<typeof inputArr>(await asyncFilterStrict(inputArr, largerThanTwoInRandomTime));
   });
 
   it('returns type never[] given function that returns type Promise<false>', async () => {
@@ -133,8 +131,6 @@ describe('asyncFilterStrict()', () => {
       );
     }
 
-    // @ts-expect-no-error
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const result: never[] = await asyncFilterStrict(inputArr, falseInRandomTime);
+    assertType<never[]>(await asyncFilterStrict(inputArr, falseInRandomTime));
   });
 });
