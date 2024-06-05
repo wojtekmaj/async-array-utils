@@ -86,7 +86,10 @@ describe('asyncReduce()', () => {
     expect(result).toEqual(['a', 'b', 'c']);
 
     // Sanity check
-    const resultSync = ['a', 'b', 'c'].reduce((temp, cur) => [...temp, cur], [] as string[]);
+    const resultSync = ['a', 'b', 'c'].reduce((temp, cur) => {
+      temp.push(cur);
+      return temp;
+    }, [] as string[]);
 
     assertType<string[]>(resultSync);
 
@@ -94,16 +97,24 @@ describe('asyncReduce()', () => {
   });
 
   it('returns type number[] given function that returns Promise<number> and initial value of type number', async () => {
-    const result = await asyncReduce(['a', 'b', 'c'], async (temp, cur, idx) => [...temp, idx], [
-      0,
-    ]);
+    const result = await asyncReduce(
+      ['a', 'b', 'c'],
+      async (temp, cur, idx) => [...temp, idx],
+      [0],
+    );
 
     assertType<number[]>(result);
 
     expect(result).toEqual([0, 0, 1, 2]);
 
     // Sanity check
-    const resultSync = ['a', 'b', 'c'].reduce((temp, cur, idx) => [...temp, idx], [0]);
+    const resultSync = ['a', 'b', 'c'].reduce(
+      (temp, cur, idx) => {
+        temp.push(idx);
+        return temp;
+      },
+      [0],
+    );
 
     assertType<number[]>(resultSync);
 

@@ -55,8 +55,8 @@ describe('asyncForEachStrict()', () => {
     expect.assertions(1 + inputArr.length);
 
     expect(mapper).toHaveBeenCalledTimes(inputArr.length);
-    inputArr.forEach((el) => {
-      expect(arr).toContain(el * 2);
+    inputArr.forEach((el, idx) => {
+      expect(mapper).toHaveBeenCalledWith(el, idx, inputArr);
     });
   });
 
@@ -69,8 +69,8 @@ describe('asyncForEachStrict()', () => {
     expect.assertions(1 + inputArr.length);
 
     expect(mapper).toHaveBeenCalledTimes(inputArr.length);
-    inputArr.forEach((el) => {
-      expect(arr).toContain(el * 2);
+    inputArr.forEach((el, idx) => {
+      expect(mapper).toHaveBeenCalledWith(el, idx, inputArr);
     });
   });
 
