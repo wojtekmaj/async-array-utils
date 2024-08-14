@@ -27,7 +27,7 @@ function asyncFilterStrict<T>(
           })
           .catch(reject);
       }),
-  ).then(() => result.filter((cur, idx) => idx in result));
+  ).then(() => result.filter((_cur, idx) => idx in result));
 }
 
 export default asyncFilterStrict;

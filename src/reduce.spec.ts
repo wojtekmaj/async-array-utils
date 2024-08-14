@@ -60,14 +60,14 @@ describe('asyncReduce()', () => {
   });
 
   it('returns type string given function that returns Promise<string> and no initial value', async () => {
-    const result = await asyncReduce(['a', 'b', 'c'], async (temp, cur) => cur);
+    const result = await asyncReduce(['a', 'b', 'c'], async (_temp, cur) => cur);
 
     assertType<string>(result);
 
     expect(result).toBe('c');
 
     // Sanity check
-    const resultSync = ['a', 'b', 'c'].reduce((temp, cur) => cur);
+    const resultSync = ['a', 'b', 'c'].reduce((_temp, cur) => cur);
 
     assertType<string>(resultSync);
 
@@ -99,7 +99,7 @@ describe('asyncReduce()', () => {
   it('returns type number[] given function that returns Promise<number> and initial value of type number', async () => {
     const result = await asyncReduce(
       ['a', 'b', 'c'],
-      async (temp, cur, idx) => [...temp, idx],
+      async (temp, _cur, idx) => [...temp, idx],
       [0],
     );
 
@@ -109,7 +109,7 @@ describe('asyncReduce()', () => {
 
     // Sanity check
     const resultSync = ['a', 'b', 'c'].reduce(
-      (temp, cur, idx) => {
+      (temp, _cur, idx) => {
         temp.push(idx);
         return temp;
       },

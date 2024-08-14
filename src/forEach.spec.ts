@@ -43,7 +43,7 @@ describe('asyncForEach()', () => {
   });
 
   it.skip('assertions below are valid for synchronous .forEach()', () => {
-    const [arr, pushDuplicate] = makePushDuplicate();
+    const [_arr, pushDuplicate] = makePushDuplicate();
     const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     inputArr.forEach(mapper);
@@ -57,7 +57,7 @@ describe('asyncForEach()', () => {
   });
 
   it('iterates through an array properly', async () => {
-    const [arr, pushDuplicate] = makePushDuplicateInRandomTime();
+    const [_arr, pushDuplicate] = makePushDuplicateInRandomTime();
     const mapper = vi.fn().mockImplementation(pushDuplicate);
 
     await asyncForEach(inputArr, mapper);
