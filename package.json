@@ -1,6 +1,6 @@
 {
   "name": "@wojtekmaj/async-array-utils",
-  "version": "1.8.1",
+  "version": "2.0.0",
   "description": "A collection of array-related async utilities.",
   "type": "module",
   "sideEffects": false,
