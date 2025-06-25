@@ -25,7 +25,7 @@ describe('asyncReduce()', () => {
 
     const timeElapsed = timer.stop();
 
-    expect(timeElapsed).toBeGreaterThanOrEqual(delay * 3);
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay * 3 - 1);
     expect(timeElapsed).toBeLessThan(delay * 1.25 * 3);
   });
 

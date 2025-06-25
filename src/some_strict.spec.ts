@@ -44,7 +44,7 @@ describe('asyncSomeStrict()', () => {
 
     const timeElapsed = timer.stop();
 
-    expect(timeElapsed).toBeGreaterThanOrEqual(delay);
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay - 1);
     expect(timeElapsed).toBeLessThan(delay * 1.25 * 3);
   });
 

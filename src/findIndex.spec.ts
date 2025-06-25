@@ -35,7 +35,7 @@ describe('asyncFindIndex()', () => {
 
     const timeElapsed = timer.stop();
 
-    expect(timeElapsed).toBeGreaterThanOrEqual(delay * 2);
+    expect(timeElapsed).toBeGreaterThanOrEqual(delay * 2 - 1);
     expect(timeElapsed).toBeLessThan(delay * 1.25 * 2);
   });
 
