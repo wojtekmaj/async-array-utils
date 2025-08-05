@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest';
+
 import {
+  asyncEvery,
+  asyncEveryStrict,
   asyncFilter,
   asyncFilterStrict,
   asyncFind,
   asyncFindIndex,
   asyncForEach,
   asyncForEachStrict,
-  asyncEvery,
-  asyncEveryStrict,
   asyncMap,
   asyncMapStrict,
   asyncReduce,

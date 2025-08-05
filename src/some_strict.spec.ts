@@ -1,17 +1,18 @@
 import { assertType, describe, expect, it, vi } from 'vitest';
+
 import asyncSomeStrict from './some_strict.js';
 
 import {
   doubleInputArr,
+  getTimer,
   inputArr,
-  largerThanTwo,
-  largerThanTwoInRandomTime,
   largerThanOneHundred,
   largerThanOneHundredInRandomTime,
+  largerThanTwo,
+  largerThanTwoInRandomTime,
+  makeDelayed,
   makePushDuplicate,
   makePushDuplicateInRandomTime,
-  makeDelayed,
-  getTimer,
   throws,
 } from '../test-utils.js';
 

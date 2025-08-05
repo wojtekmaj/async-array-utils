@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import asyncForEachStrict from './forEach_strict.js';
+
 import {
   doubleInputArr,
   getTimer,

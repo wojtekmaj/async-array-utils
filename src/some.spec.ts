@@ -1,13 +1,14 @@
 import { assertType, describe, expect, it, vi } from 'vitest';
+
 import asyncSome from './some.js';
 
 import {
+  getTimer,
   inputArr,
-  largerThanTwo,
-  largerThanTwoInRandomTime,
   largerThanOneHundred,
   largerThanOneHundredInRandomTime,
-  getTimer,
+  largerThanTwo,
+  largerThanTwoInRandomTime,
   makeDelayed,
   throws,
 } from '../test-utils.js';

@@ -1,4 +1,5 @@
 import { assertType, describe, expect, it, vi } from 'vitest';
+
 import asyncEveryStrict from './every_strict.js';
 
 import {

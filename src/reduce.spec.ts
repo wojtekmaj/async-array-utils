@@ -1,4 +1,5 @@
 import { assertType, describe, expect, it, vi } from 'vitest';
+
 import asyncReduce from './reduce.js';
 
 import { getTimer, makeDelayed, throws } from '../test-utils.js';

@@ -1,4 +1,5 @@
 import { assertType, describe, expect, it, vi } from 'vitest';
+
 import asyncMap from './map.js';
 
 import {
