@@ -1,8 +1,11 @@
-export function getRandomTime() {
+export function getRandomTime(): number {
   return Math.random() * 100;
 }
 
-export function getTimer() {
+export function getTimer(): {
+  start: () => void;
+  stop: () => number;
+} {
   let startTime: Date;
 
   function start() {
@@ -20,7 +23,7 @@ export function getTimer() {
 
 export function makeDelayed<T extends unknown[], R>(
   fn: (...args: T) => R,
-  delay = getRandomTime(),
+  delay: number = getRandomTime(),
 ): (...args: T) => Promise<R> {
   return function delayedFunction(...args) {
     return new Promise((resolve) =>
@@ -31,23 +34,25 @@ export function makeDelayed<T extends unknown[], R>(
   };
 }
 
-export function duplicate(x: number) {
+export function duplicate(x: number): number {
   return x * 2;
 }
 
-export const duplicateInRandomTime = makeDelayed(duplicate);
+export const duplicateInRandomTime: (x: number) => Promise<number> = makeDelayed(duplicate);
 
-export function largerThanTwo(x: number) {
+export function largerThanTwo(x: number): boolean {
   return x > 2;
 }
 
-export const largerThanTwoInRandomTime = makeDelayed(largerThanTwo);
+export const largerThanTwoInRandomTime: (x: number) => Promise<boolean> =
+  makeDelayed(largerThanTwo);
 
-export function largerThanOneHundred(x: number) {
+export function largerThanOneHundred(x: number): boolean {
   return x > 100;
 }
 
-export const largerThanOneHundredInRandomTime = makeDelayed(largerThanOneHundred);
+export const largerThanOneHundredInRandomTime: (x: number) => Promise<boolean> =
+  makeDelayed(largerThanOneHundred);
 
 export function makePushDuplicate(): [number[], (x: number) => void] {
   const arr: number[] = [];
@@ -69,9 +74,10 @@ export function makePushDuplicateInRandomTime(): [number[], (x: number) => Promi
   return [arr, pushDuplicate];
 }
 
-export function throws() {
+export function throws(): void {
   throw new Error('Some error');
 }
 
-export const inputArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-export const doubleInputArr = inputArr.map(duplicate);
+export const inputArr: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+export const doubleInputArr: number[] = inputArr.map(duplicate);
