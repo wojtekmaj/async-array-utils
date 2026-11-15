@@ -9,6 +9,7 @@ A collection of array-related async utilities.
 - Install by executing `npm install @wojtekmaj/async-array-utils` or `yarn add @wojtekmaj/async-array-utils`.
 - Import by adding `import * as asyncArrayUtils from '@wojtekmaj/async-array-utils'`.
 - Do stuff with it!
+
   ```ts
   const asyncMappedArr = await asyncMap([1, 2, 3], async (x) => x * 2);
   ```
